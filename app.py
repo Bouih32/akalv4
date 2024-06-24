@@ -197,8 +197,8 @@ def signup():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
-            crop_type = request.form['crop_type']
-            soil_type = request.form['soil_type']
+            # crop_type = request.form['crop_type']
+            # soil_type = request.form['soil_type']
             moisture = float(request.form['moisture'])
             temperature = float(request.form['temperateur'])
             humidity = float(request.form['humidity'])
@@ -236,11 +236,11 @@ def predict():
                 if current_user.is_authenticated:
                     user = current_user.id
                     name = request.form['name']
-                    cur.execute("INSERT INTO land (name, soil_type, crop_type,temperature, humidity, moisture,netrogen,phosphore,potassium,user,fertelizer) VALUES (?, ?, ?,?, ?, ?,?, ?, ?,?,?)",
-                        (name, soil_type, crop_type, temperature, humidity, moisture, nitrogen, phosphorous, potassium, user, result))
+                    cur.execute("INSERT INTO land (name,temperature, humidity, moisture,netrogen,phosphore,potassium,user,fertelizer) VALUES (?,?,?,?,?, ?, ?,?,?)",
+                        (name, temperature, humidity, moisture, nitrogen, phosphorous, potassium, user, result))
             else: 
-                cur.execute("UPDATE land SET soil_type = ?, crop_type = ?, moisture = ?, temperature = ?, humidity = ?, potassium = ?, phosphore = ?, fertelizer = ?, netrogen = ? WHERE land_id = ?",
-                    (soil_type, crop_type, moisture, temperature, humidity, potassium, phosphorous,result, nitrogen, land_id))
+                cur.execute("UPDATE land SET  moisture = ?, temperature = ?, humidity = ?, potassium = ?, phosphore = ?, fertelizer = ?, netrogen = ? WHERE land_id = ?",
+                    ( moisture, temperature, humidity, potassium, phosphorous,result, nitrogen, land_id))
             con.commit()
             cur.close()
             con.close()
