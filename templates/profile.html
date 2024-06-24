@@ -1,0 +1,136 @@
+{% extends 'layout.html' %} {% block body %} {% block content %}
+<section class="noAnimation bg-darkGreen sm:py-[53px] py-[37px] text-center">
+  <h2 class="font-bold lg:text-[38px] text-[26px] text-white">My Account</h2>
+</section>
+<section
+  class="noAnimation pb-[28px] sm:pt-[50px] sm:pl-[50px] p-[30px] font-bold lg:text-[25px] text-[18px] text-brown lg:gap-[50px] sm:gap-[30px] flex justify-center sm:justify-start gap-[40px] border-b border-[#333333]"
+>
+  <a href="/profile" class="border-b-[5px] border-[#0C3E00] px-[20px] pb-[10px]"
+    >Profile</a
+  >
+  <a href="/land">My Lands</a>
+</section>
+<section
+  class="flex justify-center items-center sm:items-start flex-col sm:flex-row lg:gap-[80px] sm:gap-[28px] lg:pt-[174px] sm:pt-[130px] pt-[50px] lg:pb-[90px] sm:pb-[60px] pb-[40px] gap-[55px]"
+>
+  <div
+    class="noAnimation flex flex-col justify-center items-center lg:gap-[18px] gap-[11px]"
+  >
+    <img
+      src="{{ current_user.profile_path if current_user.profile_path else '/static/images/avatar.png' }}"
+      alt="avatar"
+      class="lg:w-[190px] lg:h-[145px] w-[100px] h-[80px] rounded-full"
+    />
+
+    <form
+      method="post"
+      enctype="multipart/form-data"
+      action="{{ url_for('upload_file') }}"
+      class="hidden"
+      id="upload-form"
+    >
+      <input type="file" name="file" id="file-input" />
+      <input type="submit" value="Upload" />
+    </form>
+
+    <div class="flex lg:gap-[20px] gap-[10px]">
+      <div class="border rounded-[3px] border-[#0C3E00] p-[4px]">
+        <img
+          src="/static/images/icons/edit.png"
+          alt="edit"
+          class="lg:w-[17px] lg:h-[17px] w-[11px] h-[11px] cursor-pointer"
+          id="imageUpload"
+        />
+      </div>
+      <div class="border rounded-[3px] border-[#0C3E00] p-[4px]">
+        <a href="{{ url_for('delete_image') }}">
+          <img
+            src="/static/images/icons/delete.png"
+            alt="delete"
+            class="lg:w-[17px] lg:h-[17px] w-[11px] h-[11px] cursor-pointer"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+  <form
+    method="POST"
+    action="{{ url_for('edit_user') }}"
+    class="font-medium leading-[12px] lg:gap-[30px] gap-[20px] flex flex-col lg:w-[955px] sm:w-[553px] w-[313px]"
+  >
+    <div class="noAnimation flex flex-col gap-[15px]">
+      <label for="name" class="lg:text-[20px] text-[18px]">Full Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+        value="{{ current_user.name }}"
+      />
+    </div>
+    <div class="noAnimation flex flex-col gap-[15px]">
+      <label for="email" class="lg:text-[20px] text-[18px]">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+        value="{{ current_user.email }}"
+      />
+    </div>
+    <div
+      class="noAnimation flex justify-between flex-col lg:gap-[30px] gap-[20px] lg:flex-row"
+    >
+      <div class="flex flex-col gap-[15px] lg:w-[433px]">
+        <label for="sex" class="lg:text-[20px] text-[18px]">Sex</label>
+        <select
+          id="sex"
+          name="sex"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] px-[12px] outline-none"
+        >
+          <option value="{{ current_user.sex}}">{{ current_user.sex}}</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-[15px] lg:w-[433px]">
+        <label for="age" class="lg:text-[20px] text-[18px]">your age</label>
+        <input
+          type="text"
+          id="age"
+          name="age"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          value="{{ current_user.age}}"
+        />
+      </div>
+    </div>
+    <div class="noAnimation flex flex-col gap-[15px]">
+      <label for="about" class="lg:text-[20px] text-[18px]">About</label>
+      <textarea
+        type="text"
+        id="about"
+        name="about"
+        class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none sm:h-[310px] h-[200px] resize-none"
+        placeholder="{{ current_user.about}}"
+      ></textarea>
+    </div>
+    <div class="noAnimation flex flex-col gap-[15px]">
+      <label for="username" class="lg:text-[20px] text-[18px]">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+        value="{{ current_user.username}}"
+      />
+    </div>
+
+    <button
+      class="noAnimation bg-main font-semibold text-[18px] sm:text-[24px] rounded-[10px] text-white self-end sm:py-[25px] sm:px-[35px] px-[25px] py-[20px]"
+    >
+      Save Change
+    </button>
+  </form>
+</section>
+{% endblock %} {% endblock %}

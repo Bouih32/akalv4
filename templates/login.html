@@ -1,0 +1,111 @@
+{% extends 'formLayout.html' %} {% block body %} {% block content %}
+
+<section
+  class="bg-loginBg bg-cover bg-center sm:relative flex flex-col lg:w-[50%] sm:w-[572px] w-[100%] sm:p-[50px] p-[30px] sm:h-[100vh] flex flex-col justify-center lg:justify-center sm:justify-start sm:gap-[40px] gap-[28px] items-center sm:items-start"
+>
+  <a href="/">
+    <img
+      src="/static/images/icons/back.png"
+      alt="back arrow"
+      class="absolute top-[20px] left-[20px]"
+  /></a>
+  <div class="text-white text-center sm:text-start sm:w-[440px] mt-[35px]">
+    <h2 class="font-bold lg:text-[60px] sm:text-[52px] text-[32px]">
+      welcom back!
+    </h2>
+    <p class="lg:text-[28px] sm:text-[24px] text-[16px] text-[#777]">
+      enter your personal details and resume your journey with us
+    </p>
+  </div>
+  <form
+    form
+    method="post"
+    action="{{ url_for('login') }}"
+    class="sm:absolute lg:w-[599px] sm:w-[568px] w-[315px] lg:-right-[70%] sm:translate-x-[150px] lg:translate-y-[50%] lg:translate-x-0 sm:right-0 sm:bottom-[40px] lg:bottom-[50%] bg-white sm:py-[30px] sm:px-[40px] py-[40px] pl-[26px] pr-[34px] rounded-[10px] shadow-4xl flex flex-col gap-[30px]"
+    id="form"
+  >
+    <h3 class="text-[24px] sm:text-[40px] font-bold">Login</h3>
+    <div class="flex flex-col gap-[20px] font-medium">
+      <div class="flex flex-col gap-[7px]">
+        <label for="email" class="text-[18px]">Email</label>
+        <input
+          name="email"
+          type="email"
+          id="email"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          placeholder="Your Email"
+        />
+      </div>
+      <div class="flex flex-col gap-[7px]">
+        <label for="password" class="text-[18px]">Password</label>
+        <input
+          name="password"
+          type="password"
+          id="password"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          placeholder="Your password"
+        />
+        {% with messages = get_flashed_messages() %} {% if messages %}
+
+        <p class="text-red-500 mt-[10px] sm:text-[18px] text-[14px]">
+          {{ messages[0] }}
+        </p>
+
+        {% endif %} {% endwith %}
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="py-[10px] rounded-[10px] bg-main text-white text-[20px] font-semibold"
+      id="submitBtn"
+    >
+      Login
+    </button>
+    <p>
+      Don’t have an account
+      <a href="{{ url_for('signup') }}" class="font-bold">Sing Up</a>
+    </p>
+  </form>
+</section>
+<script>
+  const form = document.querySelector("#form");
+  const submitBtn = document.querySelector("#submitBtn");
+  const email = document.querySelector("#email");
+  const password = document.querySelector("#password");
+
+  function errorFeedback(ele, message, original) {
+    ele.classList.add("border", "border-red-500", "placeholder:text-red-500");
+    ele.placeholder = message;
+    setTimeout(() => {
+      ele.classList.remove(
+        "border",
+        "border-red-500",
+        "placeholder:text-red-500"
+      );
+      ele.placeholder = original;
+    }, 3000);
+  }
+
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let hasError = false;
+
+    if (email.value === "" || password.value === "") {
+      if (email.value === "") {
+        errorFeedback(email, "Please Enter Your Email", "Your Email");
+        let hasError = true;
+      }
+
+      if (password.value === "") {
+        errorFeedback(password, "Please Enter Your Password", "Your Password");
+        let hasError = true;
+      }
+      return;
+    }
+    if (!hasError) {
+      form.submit();
+    }
+  });
+</script>
+
+{% endblock %} {% endblock %}

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          fontFamily: {
+            poppins: ["Poppins", "sans-serif"],
+          },
+          extend: {
+            colors: {
+              main: "#24B200",
+              secondary: "#DC8400",
+              lightBg: "#EEFFEA",
+              darkGreen: "#1C9A00",
+              brown: "#4B2D00",
+            },
+            backgroundImage: {
+              hero: "url('/static/images/hero.png')",
+              analyse: "url('/static/images/analyse.png')",
+              suggest: "url('/static/images/suggest.png')",
+              save: "url('/static/images/save.png')",
+              company: "url('/static/images/company.png')",
+              ai: "url('/static/images/ai.png')",
+              health: "url('/static/images/health.png')",
+              community: "url('/static/images/community.png')",
+              contact: "url('/static/images/contact.png')",
+            },
+            boxShadow: {
+              "3xl": "0px 4px 33px 0px rgba(0, 0, 0, 0.10)",
+              "4xl": "0px 0px 10px rgba(0, 0, 0, 0.25)",
+            },
+          },
+        },
+      };
+    </script>
+    <title>Akal</title>
+    <style>
+      .noAnimation {
+        opacity: 0;
+        filter: blur(5px);
+        transition: all 1s;
+        transform: translateY(50px);
+      }
+
+      .animateScroll {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="font-poppins">
+    <header
+      class="flex justify-between items-center py-5 px-[30px] lg:px-[80px] sm:px-[50px] relative"
+    >
+      <a href="{{ url_for('index')}}"
+        ><img src="/static/images/logobrown.png" alt="logo"
+      /></a>
+      <ul
+        class="hidden sm:flex lg:gap-[93px] gap-[43px] text-brown lg:text-[18px] md:text-[16px] font-semibold"
+      >
+        <a href="/"><li>Home</li></a>
+        <a href="#about"><li>About</li></a>
+        <a href="#services"><li>Service</li></a>
+        <a href="{{ url_for('contact') }}"><li>Contact</li></a>
+      </ul>
+
+      {% if current_user.is_authenticated %}
+      <div class="hidden sm:flex gap-[20px] justify-center items-center">
+        <h2 class="text-[#0C3E00] font-semibold">{{current_user.name}}</h2>
+        <a href="{{ url_for('profile') }}">
+          <img
+            src="{{ current_user.profile_path if current_user.profile_path else '/static/images/avatar.png' }}"
+            alt="avatar"
+            class="w-[40px] h-[30px] rounded-full"
+          />
+        </a>
+        <a href="{{ url_for('logout') }}">
+          <img
+            src="/static/images/icons/out.png"
+            alt="logout"
+            class="w-[18px] h-[18px]"
+          />
+        </a>
+      </div>
+      {% else %}
+      <div
+        class="hidden items-center justify-center sm:flex lg:gap-[20px] gap-[10px] lg:text-[16px] text-[12px] font-bold"
+      >
+        <a
+          href="{{ url_for('login') }}"
+          class="text-white bg-main py-[10px] px-[17px] rounded-[5px]"
+        >
+          Login
+        </a>
+
+        <a
+          href="{{ url_for('signup') }}"
+          class="text-main py-[8px] px-[17px] border-2 border-main rounded-[5px]"
+        >
+          Sign Up
+        </a>
+      </div>
+      {% endif %}
+
+      <img
+        src="/static/images/icons/burger.png"
+        alt="burger"
+        class="sm:hidden"
+        id="burger"
+      />
+
+      <img
+        src="/static/images/icons/cross.png"
+        alt="burger"
+        class="w-[21px] h-[21px] hidden"
+        id="cross"
+      />
+      <section
+        class="hidden flex sm:hidden flex-col px-[30px] w-0 absolute top-[98%] left-0 z-50 bg-white h-[100vh]"
+        id="menu"
+      >
+        <nav
+          class="flex {{ 'flex-col-reverse pt-[40px]' if current_user.is_authenticated else 'flex-col pt-[90px]' }} gap-[40px] text-center "
+        >
+          <ul class="flex flex-col gap-[40px] text-brown text-[26px] font-bold">
+            <a href="/"><li>Home</li></a>
+            <a href="#about"><li>About</li></a>
+            <a href="#services"><li>Service</li></a>
+            <a href="/contact"><li>Contact</li></a>
+          </ul>
+
+          {% if current_user.is_authenticated %}
+          <div class="flex flex-col gap-[10px] justify-center items-center">
+            <a href="{{ url_for('profile') }}">
+              <img
+                src="{{ current_user.profile_path if current_user.profile_path else '/static/images/avatar.png' }}"
+                alt="avatar"
+                class="w-[100px] h-[100px] rounded-full"
+              />
+            </a>
+            <h2 class="text-[#0C3E00] font-semibold text-[18px]">
+              {{current_user.name}}
+            </h2>
+            <a href="{{ url_for('logout') }}">
+              <img
+                src="/static/images/icons/out.png"
+                alt="logout"
+                class="w-[28px] h-[28px]"
+              />
+            </a>
+          </div>
+          {% else %}
+          <div
+            class="flex justify-center sm:hidden gap-[23px] text-[12px] font-bold"
+          >
+            <a
+              href="{{ url_for('login') }}"
+              class="text-white bg-main py-[10px] px-[27px] rounded-[5px]"
+            >
+              Login
+            </a>
+
+            <a
+              href="{{ url_for('signup') }}"
+              class="text-main py-[8px] px-[17px] border-2 border-main rounded-[5px]"
+            >
+              Sign Up
+            </a>
+          </div>
+          {% endif %}
+        </nav>
+      </section>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer
+      class="bg-darkGreen font-bold lg:px-[80px] lg:gap-[78px] sm:gap-[50px] gap-[58px] flex flex-col text-center flex-col lg:pt-[120px] lg:pb-[30px] sm:py-[30px] py-[40px]"
+    >
+      <div
+        class="noAnimation flex flex-col lg:flex-row justify-between items-center sm:gap-[50px] gap-[58px]"
+      >
+        <img src="/static/images/logo.png" alt="logo" />
+        <ul
+          class="text-[18px] text-white flex lg:gap-[93px] sm:gap-[35px] gap-[19px]"
+        >
+          <a href="/"><li>Home</li></a>
+          <a href="#about"><li>About</li></a>
+          <a href="#services"><li>Service</li></a>
+          <a href="/contact"><li>Contact</li></a>
+        </ul>
+        <div class="flex lg:gap-[51px] gap-[42px] justify-center items-center">
+          <img
+            src="/static/images/icons/linkdin.png"
+            alt="linkdin"
+            class="h-[24px] lg:h-[37.125px]"
+          />
+          <img
+            src="/static/images/icons/facebook.png"
+            alt="facebook"
+            class="h-[24px] lg:h-[37.125px]"
+          />
+          <img
+            src="/static/images/icons/instagram.png"
+            alt="instagram"
+            class="h-[24px] lg:h-[37.125px]"
+          />
+        </div>
+      </div>
+      <p class="noAnimation text-secondary text-[16px]">
+        © AKAL– All rights reserved 2024
+      </p>
+    </footer>
+
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,132 @@
+{% extends 'layout.html' %} {% block body %} {% block content %}
+<section class="bg-darkGreen lg:py-[37px] sm:py-[44px] py-[27px]">
+  <section
+    class="noAnimation space-y-[12px] sm:space-y-[20px] font-bold text-center mx-auto"
+  >
+    <span class="text-secondary lg:text-[18px] text-[14px]">CONTACT</span>
+    <h2 class="lg:text-[48px] text-[32px] text-white">Get In Touch</h2>
+  </section>
+</section>
+<section class="flex lg:flex-row flex-col">
+  <div
+    class="bg-contact lg:space-y-[34px] space-y-[20px] bg-center bg-cover lg:py-[354px] sm:py-[75px] py-[63px] text-white text-center lg:w-[50%] sm:px-[141px] lg:px-[111px] px-[58px]"
+  >
+    <h2 class="noAnimation font-bold sm:text-[62.759px] text-[36.76px]">
+      heloo,friend!
+    </h2>
+    <p class="noAnimation sm:text-[28.241px] text-[18.24px]">
+      We're here to help! Reach out to us today and let's cultivate sustainable
+      farming together
+    </p>
+    <div
+      class="noAnimation hidden lg:flex lg:gap-[51px] gap-[42px] justify-center items-center"
+    >
+      <img src="/static/images/icons/mail.png" alt="linkdin" class="h-[24px]" />
+      <img
+        src="/static/images/icons/linkdin.png"
+        alt="linkdin"
+        class="h-[24px]"
+      />
+      <img
+        src="/static/images/icons/facebook.png"
+        alt="facebook"
+        class="h-[24px]"
+      />
+      <img
+        src="/static/images/icons/instagram.png"
+        alt="instagram"
+        class="h-[24px]"
+      />
+    </div>
+  </div>
+  <div
+    class="flex flex-col justify-center items-center lg:w-[50%] sm:py-[65px] py-[54px]"
+  >
+    <form
+      action="https://formspree.io/f/mqazzqyj"
+      method="POST"
+      class="lg:space-y-[39px] sm:space-y-[45px] space-y-[25px] flex flex-col justify-center items-start sm:items-center lg:w-[650px] sm:w-[669px] w-[315px]"
+      id="form"
+    >
+      <h2
+        class="text-[#0C3E00] font-bold lg:text-[51.429px] sm:text-[40px] text-[30px]"
+      >
+        Send us a message
+      </h2>
+      <div class="flex flex-col gap-[20px] sm:gap-[30px] lg:gap-[25px] w-full">
+        <input
+          type="text"
+          class="noAnimation placeholder:text-[#7E9978] border border-[#0C3E00] rounded-[10px] outline-none lg:p-[20px] p-[20px] sm:py-[30px] sm:pl-[26px]"
+          placeholder="Your Email"
+          id="email"
+          name="email"
+        />
+        <input
+          type="text"
+          placeholder="Your Name"
+          id="name"
+          class="noAnimation placeholder:text-[#7E9978] border border-[#0C3E00] rounded-[10px] outline-none lg:p-[20px] p-[20px] sm:py-[30px] sm:pl-[26px]"
+          name="name"
+        />
+        <textarea
+          type="text"
+          placeholder="Your Message"
+          id="msg"
+          name="message"
+          class="noAnimation placeholder:text-[#7E9978] border border-[#0C3E00] rounded-[10px] outline-none lg:h-[309.429px] h-[200px] sm:h-[361px] p-[20px]"
+        ></textarea>
+      </div>
+      <button
+        class="noAnimation font-semibold lg:text-[27.429px] sm:text-[32px] text-[22px] bg-main rounded-[10px] lg:rounded-none text-white sm:px-[60px] sm:py-[14px] px-[37px] py-[10px]"
+        id="submitBtn"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</section>
+<script>
+  const form = document.querySelector("#form");
+  const submitBtn = document.querySelector("#submitBtn");
+  const name = document.querySelector("#name");
+  const email = document.querySelector("#email");
+  const msg = document.querySelector("#msg");
+
+  function errorFeedback(ele, message, original) {
+    ele.classList.add("border-red-500", "placeholder:text-red-500");
+    ele.placeholder = message;
+    setTimeout(() => {
+      ele.classList.remove("border-red-500", "placeholder:text-red-500");
+      ele.placeholder = original;
+    }, 3000);
+  }
+
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let hasError = false;
+
+    if (email.value === "" || name.value === "" || msg.value === "") {
+      if (email.value === "") {
+        errorFeedback(email, "Please Enter Your Email", "Your Email");
+        let hasError = true;
+      }
+
+      if (name.value === "") {
+        errorFeedback(name, "Please Enter Your Name", "Your Name");
+        let hasError = true;
+      }
+
+      if (msg.value === "") {
+        errorFeedback(msg, "Please Enter Your Message", "Your Message");
+        let hasError = true;
+      }
+      return;
+    }
+
+    if (!hasError) {
+      form.submit();
+    }
+  });
+</script>
+{% endblock %} {% endblock %}

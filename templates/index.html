@@ -1,0 +1,443 @@
+{% extends 'layout.html' %} {% block body %} {% block content %}
+<section
+  class="bg-hero bg-cover text-white lg:py-[108px] py-[146px] sm:py-[97px] text-center flex flex-col items-center relative before:absolute before:w-[100%] before:h-[100%] before:bg-black/20 before:top-0 before:left-0"
+>
+  <div
+    class="lg:w-[945px] sm:w-[690px] w-[328px] lg:space-y-[42px] sm:space-y-[48px] space-y-[48px] z-40 noAnimation"
+  >
+    <h1 class="font-extrabold lg:text-[67.025px] sm:text-[47.03px] text-[24px]">
+      Our Software is Now FREE
+    </h1>
+    <p
+      class="lg:text-[25.135px] sm:lg:text-[24px] text-[16px] leading-[33.513px]"
+    >
+      By incorporating the software into our weekly operations and fertilization
+      strategy we have seen savings in both time and resources which has led to
+      a significant impact in our production"
+    </p>
+
+    <button
+      class="bg-main lg:py-6 lg:px-[84px] sm:px-[132px] py-[22px] px-[52px] lg:rounded-[10px] rounded-[20px] sm:text-[20px] text-[18px] font-bold"
+    >
+      <a
+        href="{{ url_for('add') if current_user.is_authenticated else url_for('essai') }}"
+      >
+        Try Our AI Now</a
+      >
+    </button>
+  </div>
+</section>
+<section
+  class="noAnimation space-y-[12px] sm:space-y-[20px] font-bold text-center mx-auto lg:mt-[80px] mt-[60px] mb-[97px] sm:mb-[85px] lg:mb-[108px]"
+>
+  <span class="text-secondary lg:text-[18px] text-[14px]">STEPS</span>
+  <h2 class="lg:text-[48px] text-[32px]">How It Work</h2>
+</section>
+<section
+  class="noAnimation flex sm:gap-x-[20px] sm:gap-y-[75px] gap-[77px] flex-wrap justify-center items-center lg:pb-[80px] sm:pb-[60px] pb-[63px]"
+>
+  <div
+    class="flex pt-[110px] sm:pb-[75px] pb-[54px] relative flex-col lg:px-[50px] px-[43px] sm:px-[25px] justify-center items-center gap-[15px] lg:w-[413px] w-[323px] h-[303px] h-[323px] text-center text-white bg-analyse bg-cover rounded-[10px]"
+  >
+    <h2 class="text-[28px] font-bold">Analyze Your Land</h2>
+    <p class="text-[16px]">
+      Enter details about your land like soil type, pH level, and crops. Our AI
+      will assess your soil's needs.
+    </p>
+    <span
+      class="absolute top-0 -translate-y-[50%] left-[50%] -translate-x-[50%] w-[111px] h-[111px] bg-main rounded-full text-white text-[46px] font-bold flex items-center justify-center border-[8px] border-[#EEFFEA]"
+      >1</span
+    >
+  </div>
+  <div
+    class="flex pt-[110px] sm:pb-[75px] pb-[54px] relative flex-col lg:px-[50px] px-[43px] sm:px-[25px] justify-center items-center gap-[15px] lg:w-[413px] w-[323px] h-[303px] h-[323px] text-center text-white bg-suggest bg-cover rounded-[10px]"
+  >
+    <h2 class="text-[28px] font-bold">Get Suggestions</h2>
+    <p class="text-[16px]">
+      Receive personalized fertilizer suggestions based on your land to help
+      your crops grow better.
+    </p>
+    <span
+      class="absolute top-0 -translate-y-[50%] left-[50%] -translate-x-[50%] w-[111px] h-[111px] bg-main rounded-full text-white text-[46px] font-bold flex items-center justify-center border-[8px] border-[#EEFFEA]"
+      >1</span
+    >
+  </div>
+  <div
+    class="flex pt-[110px] sm:pb-[75px] pb-[54px] relative flex-col lg:px-[50px] px-[43px] sm:px-[25px] justify-center items-center gap-[15px] lg:w-[413px] w-[323px] h-[303px] h-[323px] text-center text-white bg-save bg-cover rounded-[10px]"
+  >
+    <h2 class="text-[28px] font-bold">Save and Review</h2>
+    <p class="text-[16px]">
+      Save the recommended fertilizers to your profile for easy access and
+      future reference.
+    </p>
+    <span
+      class="absolute top-0 -translate-y-[50%] left-[50%] -translate-x-[50%] w-[111px] h-[111px] bg-main rounded-full text-white text-[46px] font-bold flex items-center justify-center border-[8px] border-[#EEFFEA]"
+      >1</span
+    >
+  </div>
+</section>
+<section
+  class="bg-lightBg lg:pt-[80px] pt-[60px] lg:pb-[80px] pb-[70px]"
+  id="about"
+>
+  <section
+    class="noAnimation space-y-[12px] space-y-[20px] font-bold text-center mx-auto mb-[30px] sm:mb-[50px] lg:mb-[60px]"
+  >
+    <span class="text-secondary lg:text-[18px] text-[14px]">ABOUT US</span>
+    <h2 class="lg:text-[48px] text-[32px]">Our Company</h2>
+  </section>
+  <section
+    class="bg-company bg-cover bg-center lg:py-[140px] sm:py-[100px] py-[54px] lg:px-[230px] sm:px-[62px] px-[48px] text-center"
+  >
+    <p
+      class="noAnimation leading-[28px] sm:leading-[42px] text-[18px] sm:text-[22px] text-white sm:tracking-[0.88px] tracking-[0.72px]"
+    >
+      We are an eco-friendly AI tech company dedicated to sustainable
+      agriculture. Our mission is to optimize crop growth and reduce
+      environmental impact by providing tailored fertilizer recommendations
+      based on your land’s needs. Join us in promoting sustainable farming for a
+      greener future.
+    </p>
+  </section>
+</section>
+
+<section
+  class="noAnimation space-y-[12px] sm:space-y-[20px] font-bold text-center mx-auto mb-[30px] sm:mb-[50px] lg:mb-[77px] lg:mt-[56px] sm:mt-[40px] mt-[60px]"
+  id="services"
+>
+  <span class="text-secondary lg:text-[18px] text-[14px]">OUR SERVICES</span>
+  <h2 class="lg:text-[48px] text-[32px]">What we Provide</h2>
+</section>
+<section
+  class="noAnimation flex flex-wrap gap-[34px] sm:gap-[30px] lg:gap-[20px] text-white justify-center items-center"
+>
+  <div
+    class="sm:w-[629px] lg:h-[629px] w-[325px] h-[303px] bg-ai bg-cover bg-center rounded-[10px] flex flex-col justify-center items-center gap-[20px] sm:gap-[24px] lg:gap-[28px] text-center lg:px-[84px] sm:px-[106px] px-[36px]"
+  >
+    <div
+      class="sm:w-[80px] sm:h-[80px] w-[47.135px] h-[47.135px] flex justify-center items-center rounded-full bg-white"
+    >
+      <img src="/static/images/icons/brain.png" alt="brain" />
+    </div>
+    <h3 class="lg:text-[27.849px] text-[22.06px] font-bold">Ai Powered</h3>
+    <p class="leading-[33.463px] text-[19.88px] lg:text-[25.097px]">
+      Using AI technology, we analyze your land’s specific characteristics
+    </p>
+  </div>
+  <div
+    class="sm:w-[629px] w-[325px] flex flex-col gap-[34px] sm:gap-[30px] lg:gap-[20px]"
+  >
+    <div
+      class="lg:px-[146px] sm:px-[106px] px-[36px] sm:w-[629px] w-[325px] h-[302px] bg-health bg-cover bg-center rounded-[10px] gap-[20px] sm:gap-[24px] lg:gap-[10px] flex flex-col justify-center items-center text-center"
+    >
+      <div
+        class="sm:w-[80px] sm:h-[80px] w-[47.135px] h-[47.135px] flex justify-center items-center rounded-full bg-white"
+      >
+        <img src="/static/images/icons/heart.png" alt="brain" />
+      </div>
+      <h3 class="lg:text-[27.849px] text-[22.06px] font-bold">Soil Health</h3>
+      <p class="leading-[33.463px] text-[19.88px] lg:text-[25.097px]">
+        Regular soil health check-ups to monitor nutrient levels
+      </p>
+    </div>
+    <div
+      class="lg:px-[146px] sm:px-[106px] px-[36px] sm:w-[629px] w-[325px] h-[302px] bg-community bg-cover bg-center rounded-[10px] flex justify-center flex-col items-center gap-[20px] sm:gap-[24px] lg:gap-[10px] text-center"
+    >
+      <div
+        class="sm:w-[80px] sm:h-[80px] w-[47.135px] h-[47.135px] flex justify-center items-center rounded-full bg-white"
+      >
+        <img
+          src="/static/images/icons/people.png"
+          alt="brain"
+          class="w-[35px] w-[35px] lg:w-[35px] lg:w-[35px]"
+        />
+      </div>
+      <h3 class="lg:text-[27.849px] text-[22.06px] font-bold">
+        Farming Consultation
+      </h3>
+      <p class="leading-[33.463px] text-[19.88px] lg:text-[25.097px]">
+        Expert advice and guidance on adopting eco-friendly practices
+      </p>
+    </div>
+  </div>
+</section>
+
+<section
+  class="lg:py-[40px] lg:px-[80px] sm:px-[52px] px-[104px] sm:py-[49px] py-[51px] flex sm:flex-row flex-col justify-between items-center text-white bg-darkGreen gap-[75px] mt-[40px] lg:mt-[80px] sm:mt-[70px]"
+>
+  <div
+    class="noAnimation lg:space-y-[16px] sm:space-y-[10px] space-y-[12px] text-center"
+  >
+    <h3 class="font-bold lg:text-[46px] text-[46px]">+20000</h3>
+    <span class="text-[28px] leading-[15px]">VIEWS</span>
+  </div>
+  <div
+    class="noAnimation lg:space-y-[16px] sm:space-y-[10px] space-y-[12px] text-center"
+  >
+    <h3 class="font-bold lg:text-[46px] text-[46px]">+5000</h3>
+    <span class="text-[28px] leading-[15px]">USERS</span>
+  </div>
+  <div
+    class="noAnimation lg:space-y-[16px] sm:space-y-[10px] space-y-[12px] text-center"
+  >
+    <h3 class="font-bold lg:text-[46px] text-[46px]">+10000</h3>
+    <span class="text-[28px] leading-[15px]">FERTILIZERS</span>
+  </div>
+</section>
+
+<section class="bg-lightBg py-[60px]">
+  <section
+    class="noAnimation space-y-[12px] sm:space-y-[20px] font-bold text-center mx-auto mb-[60px] sm:mb-[39px] lg:mb-[76px] flex flex-col items-center justify-center"
+  >
+    <span class="text-secondary lg:text-[18px] text-[14px]">FEATURES</span>
+    <h2 class="lg:text-[48px] text-[32px]">what Sets Us Apart</h2>
+  </section>
+
+  <section
+    class="noAnimation grid sm:grid-cols-4 grid-cols-2 gap-x-[80px] gap-y-[36px] lg:px-[78px] sm:px-[53px] px-[40px] justify-between items-center"
+  >
+    <div
+      class="flex flex-col gap-[24px] lg:gap-[34px] text-center items-center justify-center"
+    >
+      <img src="/static/images/icons/passion.png" alt="heart" />
+      <h3 class="text-[20px] lg:text-[22px] font-semibold">Passion</h3>
+    </div>
+    <div
+      class="flex flex-col gap-[24px] lg:gap-[34px] text-center items-center justify-center"
+    >
+      <img src="/static/images/icons/intelegence.png" alt="light" />
+      <h3 class="text-[20px] lg:text-[22px] font-semibold">Intelligence</h3>
+    </div>
+    <div
+      class="flex flex-col gap-[24px] lg:gap-[34px] text-center items-center justify-center"
+    >
+      <img
+        src="/static/images/icons/sustain.png"
+        alt="windmill"
+        class="h-[62px]"
+      />
+      <h3 class="text-[20px] lg:text-[22px] font-semibold">Sustainability</h3>
+    </div>
+    <div
+      class="flex flex-col gap-[24px] lg:gap-[34px] text-center items-center justify-center"
+    >
+      <img src="/static/images/icons/adapt.png" alt="droplet" />
+      <h3 class="text-[20px] lg:text-[22px] font-semibold">Adaptability</h3>
+    </div>
+  </section>
+</section>
+
+<section
+  class="noAnimation space-y-[12px] sm:space-y-[20px] font-bold text-center mx-auto mb-[95px] sm:mb-[74px] lg:mb-[130px] mt-[60px] lg:mt-[80px] flex flex-col items-center justify-center"
+>
+  <span class="text-secondary lg:text-[18px] text-[14px]">TESTIMONIALS</span>
+  <h2 class="lg:text-[48px] text-[32px]">What Our client say</h2>
+</section>
+<section
+  class="noAnimation flex flex-wrap justify-center items-center gap-y-[95px] sm:gap-y-[75px] sm:gap-x-[26px] lg:gap-x-[23px] lg:mb-[80px] mb-[60px]"
+>
+  <div
+    class="lg:px-[50px] lg:w-[413px] sm:w-[312px] w-[324px] lg:pt-[109px] lg:pb-[65px] sm:px-[38px] pt-[83px] sm:pb-[48px] px-[48px] pb-[51px] shadow-3xl rounded-[10px] text-center flex flex-col justify-center items-center relative"
+  >
+    <img
+      src="/static/images/review1.png"
+      alt="person face"
+      class="absolute top-0 left-[50%] -translate-x-[50%] -translate-y-[50%]"
+    />
+    <img
+      src="/static/images/icons/qoat.png"
+      alt="qoat"
+      class="lg:mb-[50px] sm:mb-[38px] mb-[45px]"
+    />
+    <p class="text-[12px] lg:text-[16px] lg:mb-[24px] sm:mb-[19px] mb-[14px]">
+      Akal’s AI transformed our farm . Their personalized recommendations
+      boosted yields sustainably
+    </p>
+    <h3 class="text-[22px] font-bold lg:text-[28px] lg:mb-[12px] mb-[9px]">
+      Emily Davis
+    </h3>
+    <p class="text-[14px] lg:text-[18px]">Organic Farmer</p>
+  </div>
+  <div
+    class="lg:px-[50px] lg:w-[413px] sm:w-[312px] w-[324px] lg:pt-[109px] lg:pb-[65px] sm:px-[38px] pt-[83px] sm:pb-[48px] px-[48px] pb-[51px] shadow-3xl rounded-[10px] text-center flex flex-col justify-center items-center relative"
+  >
+    <img
+      src="/static/images/review2.png"
+      alt="person face"
+      class="absolute top-0 left-[50%] -translate-x-[50%] -translate-y-[50%]"
+    />
+    <img
+      src="/static/images/icons/qoat.png"
+      alt="qoat"
+      class="lg:mb-[50px] sm:mb-[38px] mb-[45px]"
+    />
+    <p class="text-[12px] lg:text-[16px] lg:mb-[24px] sm:mb-[19px] mb-[14px]">
+      Implementing Akal’s AI improved our farm's productivity sustainably.
+      They're a trusted partner
+    </p>
+    <h3 class="text-[22px] font-bold lg:text-[28px] lg:mb-[12px] mb-[9px]">
+      Sarah Thompson
+    </h3>
+    <p class="text-[14px] lg:text-[18px]">Farm Manager</p>
+  </div>
+  <div
+    class="lg:px-[50px] lg:w-[413px] sm:w-[312px] w-[324px] lg:pt-[109px] lg:pb-[65px] sm:px-[38px] pt-[83px] sm:pb-[48px] px-[48px] pb-[51px] shadow-3xl rounded-[10px] text-center flex flex-col justify-center items-center relative"
+  >
+    <img
+      src="/static/images/review3.png"
+      alt="person face"
+      class="absolute top-0 left-[50%] -translate-x-[50%] -translate-y-[50%]"
+    />
+    <img
+      src="/static/images/icons/qoat.png"
+      alt="qoat"
+      class="lg:mb-[50px] sm:mb-[38px] mb-[45px]"
+    />
+    <p class="text-[12px] lg:text-[16px] lg:mb-[24px] sm:mb-[19px] mb-[14px]">
+      As an agronomist, I'm impressed by Akal’s AI's accurate soil analysis and
+      efficient recommendations
+    </p>
+    <h3 class="text-[22px] font-bold lg:text-[28px] lg:mb-[12px] mb-[9px]">
+      Dr. Michael Johnson
+    </h3>
+    <p class="text-[14px] lg:text-[18px]">Agronomist</p>
+  </div>
+</section>
+
+<section
+  class="noAnimation sm:pt-[40px] lg:pt-[64px] pt-[60px] pb-[60px] lg:pb-[90px] bg-lightBg"
+>
+  <section
+    class="space-y-[12px] sm:space-y-[20px] font-bold text-center mx-auto mb-[50px] sm:mb-[50px] lg:mb-[60px] flex flex-col items-center justify-center"
+  >
+    <span class="text-secondary lg:text-[18px] text-[14px]">TEAM</span>
+    <h2 class="lg:text-[48px] text-[32px]">Meet Our Team</h2>
+  </section>
+
+  <section
+    class="flex flex-wrap lg:gap-[20px] sm:gap-[40px] gap-[30px] justify-center items-center"
+  >
+    <div class="w-[305px] rounded-[10px] text-white overflow-hidden">
+      <img
+        src="/static/images/team.png"
+        alt="team member"
+        class="sm:h-[225.731px] h-[219.767px] w-full"
+      />
+      <div
+        class="bg-secondary lg:py-[30px] sm:py-[36px] py-[40px] space-y-[16px] text-center justify-center items-center"
+      >
+        <h4 class="text-[24px] sm:text-[28px] font-bold">Othmane Bouih</h4>
+        <p class="text-[14px] sm:text-[18px]">Fullstack Developer</p>
+        <div class="flex gap-[21px] justify-center items-center">
+          <img
+            src="/static/images/icons/linkdin.png"
+            alt="linkdin"
+            class="h-[17px] sm:h-[18px]"
+          />
+          <img
+            src="/static/images/icons/facebook.png"
+            alt="facebook"
+            class="h-[17px] sm:h-[18px]"
+          />
+          <img
+            src="/static/images/icons/instagram.png"
+            alt="instagram"
+            class="h-[17px] sm:h-[18px]"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="w-[305px] rounded-[10px] text-white overflow-hidden">
+      <img
+        src="/static/images/team.png"
+        alt="team member"
+        class="sm:h-[225.731px] h-[219.767px] w-full"
+      />
+      <div
+        class="bg-secondary lg:py-[30px] sm:py-[36px] py-[40px] space-y-[16px] text-center justify-center items-center"
+      >
+        <h4 class="text-[24px] sm:text-[28px] font-bold">Othmane Bouih</h4>
+        <p class="text-[14px] sm:text-[18px]">Fullstack Developer</p>
+        <div class="flex gap-[21px] justify-center items-center">
+          <img
+            src="/static/images/icons/linkdin.png"
+            alt="linkdin"
+            class="h-[17px] sm:h-[18px]"
+          />
+          <img
+            src="/static/images/icons/facebook.png"
+            alt="facebook"
+            class="h-[17px] sm:h-[18px]"
+          />
+          <img
+            src="/static/images/icons/instagram.png"
+            alt="instagram"
+            class="h-[17px] sm:h-[18px]"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="w-[305px] rounded-[10px] text-white overflow-hidden">
+      <img
+        src="/static/images/team.png"
+        alt="team member"
+        class="sm:h-[225.731px] h-[219.767px] w-full"
+      />
+      <div
+        class="bg-secondary lg:py-[30px] sm:py-[36px] py-[40px] space-y-[16px] text-center justify-center items-center"
+      >
+        <h4 class="text-[24px] sm:text-[28px] font-bold">Othmane Bouih</h4>
+        <p class="text-[14px] sm:text-[18px]">Fullstack Developer</p>
+        <div class="flex gap-[21px] justify-center items-center">
+          <img
+            src="/static/images/icons/linkdin.png"
+            alt="linkdin"
+            class="h-[17px] sm:h-[18px]"
+          />
+          <img
+            src="/static/images/icons/facebook.png"
+            alt="facebook"
+            class="h-[17px] sm:h-[18px]"
+          />
+          <img
+            src="/static/images/icons/instagram.png"
+            alt="instagram"
+            class="h-[17px] sm:h-[18px]"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="w-[305px] rounded-[10px] text-white overflow-hidden">
+      <img
+        src="/static/images/team.png"
+        alt="team member"
+        class="sm:h-[225.731px] h-[219.767px] w-full"
+      />
+      <div
+        class="bg-secondary lg:py-[30px] sm:py-[36px] py-[40px] space-y-[16px] text-center justify-center items-center"
+      >
+        <h4 class="text-[24px] sm:text-[28px] font-bold">Othmane Bouih</h4>
+        <p class="text-[14px] sm:text-[18px]">Fullstack Developer</p>
+        <div class="flex gap-[21px] justify-center items-center">
+          <img
+            src="/static/images/icons/linkdin.png"
+            alt="linkdin"
+            class="h-[17px] sm:h-[18px]"
+          />
+          <img
+            src="/static/images/icons/facebook.png"
+            alt="facebook"
+            class="h-[17px] sm:h-[18px]"
+          />
+          <img
+            src="/static/images/icons/instagram.png"
+            alt="instagram"
+            class="h-[17px] sm:h-[18px]"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+{% endblock %} {% endblock %}

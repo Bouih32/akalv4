@@ -1,0 +1,98 @@
+{% extends 'layout.html' %} {% block body %} {% block content %}
+<section class="noAnimation bg-darkGreen sm:py-[53px] py-[37px] text-center">
+  <h2 class="font-bold lg:text-[38px] text-[26px] text-white">My Account</h2>
+</section>
+<section
+  class="noAnimation pb-[28px] sm:pt-[50px] sm:pl-[50px] p-[30px] font-bold lg:text-[25px] text-[18px] text-brown lg:gap-[50px] sm:gap-[30px] flex justify-center sm:justify-start gap-[40px] border-b border-[#333333]"
+>
+  <a href="{{ url_for('profile') }}">Profile</a>
+  <a
+    href="{{ url_for('land') }}"
+    class="border-b-[5px] border-[#0C3E00] px-[20px] pb-[10px]"
+    >My Lands</a
+  >
+</section>
+
+<section
+  class="noAnimation pt-[40px] lg:px-[57px] sm:px-[50px] lg:pt-[36px] sm:pb-[80] pb-[68px] flex flex-wrap lg:gap-[30px] sm:gap-[20px] gap-[30px] sm:justify-start justify-center"
+>
+  <a href="{{ url_for('add') }}">
+    <div
+      class="bg-[#B5F1B0] lg:w-[407px] sm:w-[324px] w-[314px] h-[400px] rounded-[10px] flex justify-center items-center"
+    >
+      <div
+        class="bg-[#0C3E00] w-[134px] h-[134px] rounded-full flex justify-center items-center"
+      >
+        <img src="/static/images/icons/plus.png" alt="plus" />
+      </div>
+    </div>
+  </a>
+
+  {% for data in datas %}
+  <div
+    class="lg:w-[407px] sm:w-[324px] w-[314px] h-[400px] rounded-[10px] shadow-4xl"
+  >
+    <img src="{{data.land_src}}" alt="fertilzer" class="h-[204px] w-full" />
+    <div
+      class="py-[14px] pl-[22px] lg:pr-[160px] sm:pr-[80px] pr-[71px] space-y-[15px]"
+    >
+      <span class="text-[14px] leading-[22px] text-[#959393]"
+        >{{ data.name}}</span
+      >
+      <h2 class="text-[20px] font-bold leading-[24px] text-[#121212]">
+        {{ data.fertilizer_name }}
+      </h2>
+
+      <div class="flex gap-[23px] text-[14px] font-bold">
+        <div class="flex gap-[5px] leading-[22px]">
+          <img
+            src="/static/images/icons/drop.png"
+            alt="droplet"
+            class="w-[16px]"
+          />
+          <span> {{ data.moisture}}</span>
+        </div>
+        <div class="flex gap-[5px] leading-[22px]">
+          <img
+            src="/static/images/icons/temp.png"
+            alt="droplet"
+            class="w-[16px]"
+          />
+          <span> {{ data.temperature}}</span>
+        </div>
+        <div class="flex gap-[5px] leading-[22px]">
+          <img
+            src="/static/images/icons/seed.png"
+            alt="droplet"
+            class="w-[16px]"
+          />
+          <span> {{ data.phosphore}}</span>
+        </div>
+      </div>
+      <div class="text-white text-[14px] font-bold flex gap-[17px]">
+        <form action="{{url_for('edit')}}" method="post">
+          <input type="hidden" name="land_id" value="{{ data.land_id }}" />
+          <button
+            type="submit"
+            class="py-[10px] px-[35px] rounded-[10px] bg-main"
+          >
+            Edit
+          </button>
+        </form>
+
+        <form action="{{ url_for('delete') }}" method="post">
+          <input type="hidden" name="land_id" value="{{ data.land_id }}" />
+          <button
+            type="submit"
+            class="py-[10px] px-[25px] rounded-[10px] bg-secondary"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</section>
+
+{% endblock %} {% endblock %}

@@ -1,0 +1,224 @@
+{% extends 'formLayout.html' %} {% block body %}
+<section
+  class="font-poppins bg-lightBg flex justify-center items-center sm:py-[60px]"
+>
+  <form
+    action="{{ url_for('predict') }}"
+    method="post"
+    class="font-medium lg:p-[50px] sm:px-[34px] px-[30px] pt-[50px] leading-[12px] lg:gap-[30px] gap-[20px] flex flex-col lg:w-[700px] sm:w-[668px] w-[100%] bg-white rounded-[10px] shadow-3xl pb-[50px]"
+    id="form"
+  >
+    <h2 class="text-[#4B2D00] font-bold text-[32px] mb-[30px]">Edit Land</h2>
+
+    <div
+      class="flex justify-between flex-col lg:gap-[30px] gap-[20px] lg:flex-row"
+    >
+      <div class="flex flex-col gap-[15px] lg:w-[433px]">
+        <label for="soil_type" class="lg:text-[20px] text-[18px]"
+          >Soil Type</label
+        >
+        <select
+          id="soil_type"
+          name="soil_type"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] px-[12px] outline-none appearance-none"
+        >
+          <option value="{{info.soil_type}}">{{info.soil_type}}</option>
+          <option value="Sandy">Sandy</option>
+          <option value="Loamy">Loamy</option>
+          <option value="Black">Black</option>
+          <option value="Red">Red</option>
+          <option value="Clayey">Clayey</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-[15px] lg:w-[433px]">
+        <label for="crop_type" class="lg:text-[20px] text-[18px]"
+          >Crop Type</label
+        >
+        <select
+          id="crop_type"
+          name="crop_type"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] px-[12px] outline-none appearance-none"
+        >
+          <option value="{{info.crop_type}}">{{info.crop_type}}</option>
+          <option value="Maize">Maize</option>
+          <option value="Sugarcane">Sugarcane</option>
+          <option value="Cotton">Cotton</option>
+          <option value="Tobacco">Tobacco</option>
+          <option value="Paddy">Paddy</option>
+          <option value="Barley">Barley</option>
+          <option value="Wheat">Wheat</option>
+          <option value="Millets">Millets</option>
+          <option value="Oil seeds">Oil seeds</option>
+          <option value="Pulses">Pulses</option>
+          <option value="Male">Ground Nuts</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex flex-col gap-[15px]">
+      <label for="temperateur" class="lg:text-[20px] text-[18px]"
+        >Temperateur</label
+      >
+      <input
+        type="text"
+        id="temperateur"
+        name="temperateur"
+        class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+        placeholder="{{info.temperature}}"
+      />
+    </div>
+
+    <div
+      class="flex justify-between flex-col lg:gap-[30px] gap-[20px] lg:flex-row"
+    >
+      <div class="flex flex-col gap-[15px] lg:w-[433px]">
+        <label for="humidity" class="lg:text-[20px] text-[18px]"
+          >Humidity</label
+        >
+        <input
+          type="text"
+          id="humidity"
+          name="humidity"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          placeholder="{{info.humidity}}"
+        />
+      </div>
+
+      <div class="flex flex-col gap-[15px] lg:w-[433px]">
+        <label for="moisture" class="lg:text-[20px] text-[18px]"
+          >Moisture</label
+        >
+        <input
+          type="text"
+          id="moisture"
+          name="moisture"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          placeholder="{{info.moisture}}"
+        />
+      </div>
+    </div>
+    <div class="flex flex-col gap-[15px]">
+      <label for="netrogen" class="lg:text-[20px] text-[18px]">Netrogen</label>
+      <input
+        type="text"
+        id="netrogen"
+        name="netrogen"
+        class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+        placeholder="{{info.netrogen}}"
+      />
+    </div>
+
+    <div
+      class="flex justify-between flex-col lg:gap-[30px] gap-[20px] lg:flex-row"
+    >
+      <div class="flex flex-col gap-[15px] lg:w-[433px]">
+        <label for="phosphore" class="lg:text-[20px] text-[18px]"
+          >Phosphore</label
+        >
+        <input
+          type="text"
+          id="phosphore"
+          name="phosphore"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          placeholder="{{info.phosphore}}"
+        />
+      </div>
+
+      <div class="flex flex-col gap-[15px] lg:w-[433px]">
+        <label for="potassium" class="lg:text-[20px] text-[18px]"
+          >Potassium</label
+        >
+        <input
+          type="text"
+          id="potassium"
+          name="potassium"
+          class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          placeholder="{{info.potassium}}"
+        />
+
+        <input type="hidden" name="land_id" value="{{ info.land_id }}" />
+      </div>
+    </div>
+    <div class="flex sm:gap-[15px] gap-[10px] self-end">
+      <a
+        href="{{ url_for('land') }}"
+        class="bg-secondary font-semibold text-[16px] sm:text-[20px] rounded-[5px] text-white sm:py-[20px] sm:px-[35px] px-[25px] py-[18px]"
+      >
+        Back
+      </a>
+      <button
+        type="submit"
+        class="bg-main font-semibold text-[16px] sm:text-[20px] rounded-[5px] text-white sm:py-[20px] sm:px-[35px] px-[25px] py-[18px]"
+        id="submitBtn"
+      >
+        Edit
+      </button>
+    </div>
+  </form>
+</section>
+<script>
+  const form = document.querySelector("#form");
+  const submitBtn = document.querySelector("#submitBtn");
+  const temperateur = document.querySelector("#temperateur");
+  const humidity = document.querySelector("#humidity");
+  const moisture = document.querySelector("#moisture");
+  const netrogen = document.querySelector("#netrogen");
+  const phosphore = document.querySelector("#phosphore");
+  const potassium = document.querySelector("#potassium");
+
+  function errorFeedback(ele, message, original) {
+    ele.classList.add("border", "border-red-500", "placeholder:text-red-500");
+    ele.value = "";
+    ele.placeholder = message;
+    setTimeout(() => {
+      ele.classList.remove(
+        "border",
+        "border-red-500",
+        "placeholder:text-red-500"
+      );
+      ele.placeholder = original;
+    }, 3000);
+  }
+
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let hasError = false;
+
+    if (temperateur.value === "" || isNaN(Number(temperateur.value))) {
+      errorFeedback(
+        temperateur,
+        "Numiric Value Obligatoty",
+        "Temperature Value"
+      );
+      hasError = true;
+    }
+
+    if (humidity.value === "" || isNaN(Number(humidity.value))) {
+      errorFeedback(humidity, "Numiric Value Obligatoty", "Humidity Value");
+      hasError = true;
+    }
+
+    if (moisture.value === "" || isNaN(Number(moisture.value))) {
+      errorFeedback(moisture, "Numiric Value Obligatoty", "Mumidity Value");
+      hasError = true;
+    }
+
+    if (netrogen.value === "" || isNaN(Number(netrogen.value))) {
+      errorFeedback(netrogen, "Numiric Value Obligatoty", "Netrogen Value");
+      hasError = true;
+    }
+    if (phosphore.value === "" || isNaN(Number(phosphore.value))) {
+      errorFeedback(phosphore, "Numiric Value Obligatoty", "Phosphore Value");
+      hasError = true;
+    }
+    if (potassium.value === "" || isNaN(Number(potassium.value))) {
+      errorFeedback(potassium, "Numiric Value Obligatoty", "Potassium Value");
+      hasError = true;
+    }
+
+    if (!hasError) {
+      form.submit();
+    }
+  });
+</script>
+{% endblock %}
