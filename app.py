@@ -197,8 +197,6 @@ def signup():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
-            # crop_type = request.form['crop_type']
-            # soil_type = request.form['soil_type']
             moisture = float(request.form['moisture'])
             temperature = float(request.form['temperateur'])
             humidity = float(request.form['humidity'])

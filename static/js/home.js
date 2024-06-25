@@ -33,6 +33,7 @@ const observer = new IntersectionObserver((sect) => {
 });
 
 noAnimation.forEach((ele) => observer.observe(ele));
+
 if (upload) {
   upload.addEventListener("click", () => {
     image_input.click();

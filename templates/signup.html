@@ -113,7 +113,8 @@
       password.value !== password2.value ||
       name.value === "" ||
       email.value === "" ||
-      password.value === ""
+      password.value === "" ||
+      password2.value === ""
     ) {
       if (password.value !== password2.value) {
         errorFeedback(password2, "Passwords Don't Match", "Your Password");
@@ -132,6 +133,11 @@
 
       if (password.value === "") {
         errorFeedback(password, "Please Enter Your Password", "Your Password");
+        let hasError = true;
+      }
+
+      if (password2.value === "") {
+        errorFeedback(password2, "Please Enter Your Password", "Your Password");
         let hasError = true;
       }
       return;
