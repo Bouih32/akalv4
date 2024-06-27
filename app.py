@@ -159,7 +159,7 @@ def login():
         cur.execute("SELECT * FROM user WHERE email = ?", (email,))
         user = cur.fetchone()
         if user and check_password_hash(user[3], password):
-            user_obj = User(user_id=user[0], full_name=user[1], email=user[2], password=user[3],sex=user[4],age=user[5],about=user[6],username=user[7],profile_path=user[8])
+            user_obj = User(user_id=user[0], full_name=user[1], email=user[2], password=user[3],sex=user[4],age=user[5],about=user[6],username=user[7],profile_path=user[8],role=user[9])
             login_user(user_obj)
             return redirect(url_for('profile'))
         else:
