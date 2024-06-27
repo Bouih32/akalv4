@@ -23,7 +23,7 @@ model_file.close()
 
 
 class User(UserMixin):
-    def __init__(self, user_id, full_name, email, password,sex,age,about,username,profile_path):
+    def __init__(self, user_id, full_name, email, password,sex,age,about,username,profile_path,role):
         self.id = user_id
         self.name = full_name
         self.email = email
@@ -33,6 +33,7 @@ class User(UserMixin):
         self.about = about
         self.username = username
         self.profile_path = profile_path
+        self.role = role
 
 
 @login_manager.user_loader
@@ -42,7 +43,7 @@ def load_user(user_id):
     cur.execute("SELECT * FROM user WHERE user_id = ?", (user_id,))
     user = cur.fetchone()
     if user:
-        return User(user_id=user[0], full_name=user[1], email=user[2], password=user[3],sex=user[4],age=user[5],about=user[6],username=user[7],profile_path=user[8])
+        return User(user_id=user[0], full_name=user[1], email=user[2], password=user[3],sex=user[4],age=user[5],about=user[6],username=user[7],profile_path=user[8],role=user[9])
     return None
 
 @app.route('/')
@@ -189,7 +190,7 @@ def signup():
             flash("This Email Alrady Exists")
             return redirect(url_for("signup"))
         else :
-            cur.execute("INSERT INTO user (full_name, email, password) VALUES (?, ?, ?)", (name, email, hashed_password))
+            cur.execute("INSERT INTO user (full_name, email, password,role) VALUES (?, ?, ?,?)", (name, email, hashed_password,0))
             con.commit()
             return redirect(url_for("login"))
     return render_template("signup.html")
