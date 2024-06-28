@@ -3,7 +3,7 @@
   class="font-poppins bg-lightBg flex justify-center items-center sm:py-[60px]"
 >
   <form
-    action="{{ url_for('predict') }}"
+    action="{{ url_for('editLand') }}"
     method="post"
     class="font-medium lg:p-[50px] sm:px-[34px] px-[30px] pt-[50px] leading-[12px] lg:gap-[30px] gap-[20px] flex flex-col lg:w-[700px] sm:w-[668px] w-[100%] bg-white rounded-[10px] shadow-3xl pb-[50px]"
     id="form"
@@ -111,7 +111,7 @@
     </div>
   </form>
 </section>
-<script>
+<!-- <script>
   const form = document.querySelector("#form");
   const submitBtn = document.querySelector("#submitBtn");
   const temperateur = document.querySelector("#temperateur");
@@ -175,5 +175,5 @@
       form.submit();
     }
   });
-</script>
+</script> -->
 {% endblock %}

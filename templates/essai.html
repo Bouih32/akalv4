@@ -93,14 +93,16 @@
       </div>
     </div>
     <div class="flex sm:gap-[15px] gap-[10px] self-end">
-      <button
+      <a
+        href="{{ url_for('index')}}"
         class="bg-secondary font-semibold text-[16px] sm:text-[20px] rounded-[5px] text-white sm:py-[20px] sm:px-[35px] px-[25px] py-[18px]"
       >
         Back
-      </button>
+      </a>
       <button
         class="bg-main font-semibold text-[16px] sm:text-[20px] rounded-[5px] text-white sm:py-[20px] sm:px-[35px] px-[25px] py-[18px]"
         id="submitBtn"
+        type="submit"
       >
         Try
       </button>
