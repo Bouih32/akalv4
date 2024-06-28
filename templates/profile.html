@@ -54,6 +54,7 @@
     </div>
   </div>
   <form
+    id="form"
     method="POST"
     action="{{ url_for('edit_user') }}"
     class="font-medium leading-[12px] lg:gap-[30px] gap-[20px] flex flex-col lg:w-[955px] sm:w-[553px] w-[313px]"
@@ -127,10 +128,106 @@
     </div>
 
     <button
+      id="submitBtn"
       class="noAnimation bg-main font-semibold text-[18px] sm:text-[24px] rounded-[10px] text-white self-end sm:py-[25px] sm:px-[35px] px-[25px] py-[20px]"
     >
       Save Change
     </button>
   </form>
 </section>
+<script>
+  const form = document.querySelector("#form");
+  const submitBtn = document.querySelector("#submitBtn");
+  const email = document.querySelector("#email");
+  const sex = document.querySelector("#sex");
+  const age = document.querySelector("#age");
+  const name = document.querySelector("#name");
+  const about = document.querySelector("#about");
+  const username = document.querySelector("#username");
+  const emailPattern = new RegExp(
+    "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+  );
+
+  function errorFeedback(ele, message, original) {
+    ele.classList.add("border", "border-red-500", "placeholder:text-red-500");
+    ele.value = "";
+    ele.placeholder = message;
+    setTimeout(() => {
+      ele.classList.remove(
+        "border",
+        "border-red-500",
+        "placeholder:text-red-500"
+      );
+      ele.placeholder = original;
+    }, 3000);
+  }
+
+  submitBtn.addEventListener("click", (e) => {
+    let form_error = false;
+    e.preventDefault();
+    if (name.value.length > 25 || name.value === "") {
+      if (name.value.length > 25) {
+        errorFeedback(
+          name,
+          "Full Name Can't Be More than 25 Characters",
+          "Enter Full Name"
+        );
+      } else {
+        errorFeedback(name, "Full Name Must Not Be Empty", "Enter Full Name");
+      }
+      form_error = true;
+    }
+
+    if (
+      email.value.length > 40 ||
+      email.value === "" ||
+      !emailPattern.test(email.value)
+    ) {
+      if (email.value.length > 40) {
+        errorFeedback(
+          email,
+          "Email Can't Be More than 40 Characters",
+          "Enter Email"
+        );
+      } else if (email.value === "") {
+        errorFeedback(email, "Email Must Not Be Empty", "Enter Email");
+      } else {
+        errorFeedback(email, "Please Enter A Valid Email ", "Enter Email");
+      }
+      form_error = true;
+    }
+
+    if (
+      age.value === "" ||
+      isNaN(Number(age.value)) ||
+      Number(age.value) > 100
+    ) {
+      if (age.value === "" || isNaN(Number(age.value))) {
+        errorFeedback(age, "Please Enter Your Age Number", "Enter Your Age");
+      } else {
+        errorFeedback(age, "You Can't Be That Old :) ", "Enter Your Age");
+      }
+      form_error = true;
+    }
+
+    if (username.value === "" || username.value.length > 10) {
+      if (username.value === "") {
+        errorFeedback(
+          username,
+          "Please Enter Your Username",
+          "Enter Your Username"
+        );
+      } else {
+        errorFeedback(
+          username,
+          "Username can't be Over 10 Characters ",
+          "Enter Your Username"
+        );
+      }
+      form_error = true;
+    }
+
+    if (!form_error) form.submit();
+  });
+</script>
 {% endblock %} {% endblock %}
