@@ -19,6 +19,7 @@
         id="temperateur"
         name="temperateur"
         class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+        value="{{info.temperature}}"
         placeholder="{{info.temperature}}"
       />
     </div>
@@ -35,6 +36,7 @@
           id="humidity"
           name="humidity"
           class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          value="{{info.humidity}}"
           placeholder="{{info.humidity}}"
         />
       </div>
@@ -48,6 +50,7 @@
           id="moisture"
           name="moisture"
           class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          value="{{info.moisture}}"
           placeholder="{{info.moisture}}"
         />
       </div>
@@ -59,6 +62,7 @@
         id="netrogen"
         name="netrogen"
         class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+        value="{{info.netrogen}}"
         placeholder="{{info.netrogen}}"
       />
     </div>
@@ -75,6 +79,7 @@
           id="phosphore"
           name="phosphore"
           class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          value="{{info.phosphore}}"
           placeholder="{{info.phosphore}}"
         />
       </div>
@@ -88,6 +93,7 @@
           id="potassium"
           name="potassium"
           class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+          value="{{info.potassium}}"
           placeholder="{{info.potassium}}"
         />
 
@@ -111,7 +117,7 @@
     </div>
   </form>
 </section>
-<!-- <script>
+<script>
   const form = document.querySelector("#form");
   const submitBtn = document.querySelector("#submitBtn");
   const temperateur = document.querySelector("#temperateur");
@@ -139,35 +145,95 @@
     e.preventDefault();
     let hasError = false;
 
-    if (temperateur.value === "" || isNaN(Number(temperateur.value))) {
-      errorFeedback(
-        temperateur,
-        "Numiric Value Obligatoty",
-        "Temperature Value"
-      );
+    if (
+      temperateur.value === "" ||
+      isNaN(Number(temperateur.value)) ||
+      temperateur.value >= 48 ||
+      temperateur.value < 0
+    ) {
+      if (temperateur.value === "" || isNaN(Number(temperateur.value))) {
+        errorFeedback(
+          temperateur,
+          "Numiric Value Obligatoty",
+          "Temperature Value"
+        );
+      } else {
+        errorFeedback(
+          temperateur,
+          "Wooow There Slow Down",
+          "Temperature Value"
+        );
+      }
       hasError = true;
     }
 
-    if (humidity.value === "" || isNaN(Number(humidity.value))) {
-      errorFeedback(humidity, "Numiric Value Obligatoty", "Humidity Value");
+    if (
+      humidity.value === "" ||
+      isNaN(Number(humidity.value)) ||
+      humidity.value >= 92 ||
+      humidity.value < 0
+    ) {
+      if (humidity.value === "" || isNaN(Number(humidity.value))) {
+        errorFeedback(humidity, "Numiric Value Obligatoty", "Humidity Value");
+      } else {
+        errorFeedback(humidity, "Wooow There Slow Down", "Humidity Value");
+      }
       hasError = true;
     }
 
-    if (moisture.value === "" || isNaN(Number(moisture.value))) {
-      errorFeedback(moisture, "Numiric Value Obligatoty", "Mumidity Value");
+    if (
+      moisture.value === "" ||
+      isNaN(Number(moisture.value)) ||
+      moisture.value >= 85 ||
+      moisture.value < 0
+    ) {
+      if (moisture.value === "" || isNaN(Number(moisture.value))) {
+        errorFeedback(moisture, "Numiric Value Obligatoty", "Humidity Value");
+      } else {
+        errorFeedback(moisture, "Wooow There Slow Down", "Moisture Value");
+      }
       hasError = true;
     }
 
-    if (netrogen.value === "" || isNaN(Number(netrogen.value))) {
-      errorFeedback(netrogen, "Numiric Value Obligatoty", "Netrogen Value");
+    if (
+      netrogen.value === "" ||
+      isNaN(Number(netrogen.value)) ||
+      netrogen.value >= 62 ||
+      netrogen.value < 0
+    ) {
+      if (netrogen.value === "" || isNaN(Number(netrogen.value))) {
+        errorFeedback(netrogen, "Numiric Value Obligatoty", "Humidity Value");
+      } else {
+        errorFeedback(netrogen, "Wooow There Slow Down", "Moisture Value");
+      }
       hasError = true;
     }
-    if (phosphore.value === "" || isNaN(Number(phosphore.value))) {
-      errorFeedback(phosphore, "Numiric Value Obligatoty", "Phosphore Value");
+
+    if (
+      phosphore.value === "" ||
+      isNaN(Number(phosphore.value)) ||
+      phosphore.value >= 62 ||
+      phosphore.value < 0
+    ) {
+      if (phosphore.value === "" || isNaN(Number(phosphore.value))) {
+        errorFeedback(phosphore, "Numiric Value Obligatoty", "Humidity Value");
+      } else {
+        errorFeedback(phosphore, "Wooow There Slow Down", "Moisture Value");
+      }
       hasError = true;
     }
-    if (potassium.value === "" || isNaN(Number(potassium.value))) {
-      errorFeedback(potassium, "Numiric Value Obligatoty", "Potassium Value");
+
+    if (
+      potassium.value === "" ||
+      isNaN(Number(potassium.value)) ||
+      potassium.value >= 39 ||
+      potassium.value < 0
+    ) {
+      if (potassium.value === "" || isNaN(Number(potassium.value))) {
+        errorFeedback(potassium, "Numiric Value Obligatoty", "Humidity Value");
+      } else {
+        errorFeedback(potassium, "Wooow There Slow Down", "Moisture Value");
+      }
       hasError = true;
     }
 
@@ -175,5 +241,5 @@
       form.submit();
     }
   });
-</script> -->
+</script>
 {% endblock %}

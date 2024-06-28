@@ -112,6 +112,7 @@
     if (
       password.value !== password2.value ||
       name.value === "" ||
+      !isNaN(Number(name.value)) ||
       email.value === "" ||
       password.value === ""
     ) {
@@ -120,7 +121,7 @@
         let hasError = true;
       }
 
-      if (name.value === "") {
+      if (name.value === "" || !isNaN(Number(name.value))) {
         errorFeedback(name, "Please Enter Your Name", "Adam");
         let hasError = true;
       }
