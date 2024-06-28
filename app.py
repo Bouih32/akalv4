@@ -190,7 +190,7 @@ def signup():
             flash("This Email Alrady Exists")
             return redirect(url_for("signup"))
         else :
-            cur.execute("INSERT INTO user (full_name, email, password,role) VALUES (?, ?, ?,?)", (name, email, hashed_password,0))
+            cur.execute("INSERT INTO user (username, email, password,role) VALUES (?, ?, ?,?)", (name, email, hashed_password,0))
             con.commit()
             return redirect(url_for("login"))
     return render_template("signup.html")

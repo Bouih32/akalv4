@@ -26,7 +26,7 @@
     <h3 class="text-[24px] sm:text-[40px] font-bold">Sign Up</h3>
     <div class="flex flex-col sm:gap-[10px] gap-[20px] font-medium">
       <div class="flex flex-col gap-[7px]">
-        <label for="name" class="text-[18px]">Full Name</label>
+        <label for="name" class="text-[18px]">Userame</label>
         <input
           type="text"
           id="name"
@@ -85,6 +85,9 @@
   const email = document.querySelector("#email");
   const password = document.querySelector("#password");
   const password2 = document.querySelector("#password2");
+  const emailPattern = new RegExp(
+    "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+  );
 
   function errorFeedback(ele, message, original) {
     ele.classList.add("border", "border-red-500", "placeholder:text-red-500");
@@ -121,18 +124,58 @@
         let hasError = true;
       }
 
-      if (name.value === "" || !isNaN(Number(name.value))) {
-        errorFeedback(name, "Please Enter Your Name", "Adam");
+      if (
+        name.value === "" ||
+        isNaN(Number(name.value)) ||
+        name.value.length > 10
+      ) {
+        if (name.value.length > 10) {
+          errorFeedback(
+            name,
+            "Username can't be Over 10 Characters ",
+            "Enter Your Username"
+          );
+        } else {
+          errorFeedback(name, "Please Enter A Valid Username", "Adam");
+        }
+
         let hasError = true;
       }
 
-      if (email.value === "") {
-        errorFeedback(email, "Please Enter Your Email", "Your Email");
-        let hasError = true;
+      if (
+        email.value.length > 40 ||
+        email.value === "" ||
+        !emailPattern.test(email.value)
+      ) {
+        if (email.value.length > 40) {
+          errorFeedback(
+            email,
+            "Email Can't Be More than 40 Characters",
+            "Enter Email"
+          );
+        } else if (email.value === "") {
+          errorFeedback(email, "Email Must Not Be Empty", "Enter Email");
+        } else {
+          errorFeedback(email, "Please Enter A Valid Email ", "Enter Email");
+        }
+        form_error = true;
       }
 
-      if (password.value === "") {
-        errorFeedback(password, "Please Enter Your Password", "Your Password");
+      if (password.value === "" || password.value.length > 30) {
+        if (password.value.length > 30) {
+          errorFeedback(
+            password,
+            "Password Cant't Be Over 30 Characters",
+            "Your Password"
+          );
+        } else {
+          errorFeedback(
+            password,
+            "Please Enter Your Password",
+            "Your Password"
+          );
+        }
+
         let hasError = true;
       }
 
