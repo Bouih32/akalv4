@@ -71,11 +71,11 @@ def add():
 def edit_user():
     if request.method == 'POST':
         id = current_user.id
-        new_username = request.form.get('username') if request.form.get('username') else current_user.username
-        new_email =  request.form.get('email') if request.form.get('email') else current_user.email
-        new_name = request.form.get('name') if request.form.get('name') else current_user.name
-        new_sex = request.form.get('sex') if request.form.get('sex') else current_user.sex
-        new_age = request.form.get('age') if request.form.get('age') else current_user.age
+        new_username = request.form.get('username') 
+        new_email =  request.form.get('email')
+        new_name = request.form.get('name') 
+        new_sex = request.form.get('sex')
+        new_age = request.form.get('age')
         new_about = request.form.get('about') if request.form.get('about') else current_user.about
         
         con = sqlite3.connect("akal.db")
@@ -228,61 +228,23 @@ def predict():
             cur = con.cursor()
             cur.execute("SELECT * FROM fertilizer WHERE name = ?", (result,))
             fer = cur.fetchone()
-            if current_user.is_authenticated:
-                user = current_user.id
-                name = request.form['name']
-                cur.execute("INSERT INTO land (name,temperature, humidity, moisture,netrogen,phosphore,potassium,user,fertelizer) VALUES (?,?,?,?,?, ?, ?,?,?)",
+
+            land_id = request.form.get('land_id') 
+
+            if not land_id: 
+                if current_user.is_authenticated:
+                    user = current_user.id
+                    name = request.form['name']
+                    cur.execute("INSERT INTO land (name,temperature, humidity, moisture,netrogen,phosphore,potassium,user,fertelizer) VALUES (?,?,?,?,?, ?, ?,?,?)",
                         (name, temperature, humidity, moisture, nitrogen, phosphorous, potassium, user, result))
-                con.commit()
-                cur.close()
-                con.close()
+            else: 
+                cur.execute("UPDATE land SET  moisture = ?, temperature = ?, humidity = ?, potassium = ?, phosphore = ?, fertelizer = ?, netrogen = ? WHERE land_id = ?",
+                    ( moisture, temperature, humidity, potassium, phosphorous,result, nitrogen, land_id))
+            con.commit()
+            cur.close()
+            con.close()
             return render_template('result.html', data=fer)
     
-
-@app.route('/editLand', methods=['GET', 'POST'])
-@login_required
-def editLand():
-    if request.method == 'POST':
-        land_id = request.form.get('land_id')
-        con = sqlite3.connect("akal.db")
-        con.row_factory = sqlite3.Row
-        cur = con.cursor()
-        cur.execute("SELECT * FROM land WHERE land_id = ?", (land_id,))
-        land = cur.fetchone()
-        print(land)
-
-        moisture = float(request.form['moisture']) if request.form['moisture'] else land["moisture"]
-        temperature = float(request.form['temperateur']) if request.form['temperateur'] else land["temperature"]
-        humidity = float(request.form['humidity']) if request.form['humidity'] else land["humidity"]
-        nitrogen = float(request.form['netrogen']) if request.form['netrogen'] else land["netrogen"]
-        potassium = float(request.form['potassium']) if request.form['potassium'] else land["potassium"]
-        phosphorous = float(request.form['phosphore']) if request.form['phosphore'] else land["phosphore"]
-
-        input_data = pd.DataFrame({
-                'Temparature': [temperature],
-                'Humidity': [humidity],
-                'Moisture': [moisture],
-                'Nitrogen': [nitrogen],
-                'Potassium': [potassium],
-                'Phosphorous': [phosphorous],
-            })
-        
-        prediction = model.predict(input_data)
-        if '/' in prediction[0]:
-            parts = prediction[0].split('/')
-            year = parts[2].replace('20', '', 1)  
-            result = f"{parts[0]}-{parts[1]}-{year}"
-        else :
-            result=prediction[0]
-
-        cur.execute("SELECT * FROM fertilizer WHERE name = ?", (result,))
-        fer = cur.fetchone()
-        cur.execute("UPDATE land SET  moisture = ?, temperature = ?, humidity = ?, potassium = ?, phosphore = ?, fertelizer = ?, netrogen = ? WHERE land_id = ?",
-            ( moisture, temperature, humidity, potassium, phosphorous,result, nitrogen, land_id))
-        con.commit()
-        cur.close()
-        con.close()
-        return render_template('result.html', data=fer)
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
