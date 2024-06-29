@@ -60,15 +60,16 @@
     class="font-medium leading-[12px] lg:gap-[30px] gap-[20px] flex flex-col lg:w-[955px] sm:w-[553px] w-[313px]"
   >
     <div class="noAnimation flex flex-col gap-[15px]">
-      <label for="name" class="lg:text-[20px] text-[18px]">Full Name</label>
+      <label for="username" class="lg:text-[20px] text-[18px]">Username</label>
       <input
         type="text"
-        id="name"
-        name="name"
+        id="username"
+        name="username"
         class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
-        value="{{ current_user.name }}"
+        value="{{ current_user.username}}"
       />
     </div>
+
     <div class="noAnimation flex flex-col gap-[15px]">
       <label for="email" class="lg:text-[20px] text-[18px]">Email</label>
       <input
@@ -106,6 +107,7 @@
         />
       </div>
     </div>
+
     <div class="noAnimation flex flex-col gap-[15px]">
       <label for="about" class="lg:text-[20px] text-[18px]">About</label>
       <textarea
@@ -117,16 +119,15 @@
       ></textarea>
     </div>
     <div class="noAnimation flex flex-col gap-[15px]">
-      <label for="username" class="lg:text-[20px] text-[18px]">Username</label>
+      <label for="name" class="lg:text-[20px] text-[18px]">Full Name</label>
       <input
         type="text"
-        id="username"
-        name="username"
+        id="name"
+        name="name"
         class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
-        value="{{ current_user.username}}"
+        value="{{ current_user.name }}"
       />
     </div>
-
     <button
       id="submitBtn"
       class="noAnimation bg-main font-semibold text-[18px] sm:text-[24px] rounded-[10px] text-white self-end sm:py-[25px] sm:px-[35px] px-[25px] py-[20px]"
