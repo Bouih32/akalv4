@@ -77,6 +77,9 @@
         <a href="#about"><li>About</li></a>
         <a href="#services"><li>Service</li></a>
         <a href="{{ url_for('contact') }}"><li>Contact</li></a>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('shop') }}"><li>Shop</li></a>
+        {% endif %}
       </ul>
 
       {% if current_user.is_authenticated %}
@@ -141,7 +144,10 @@
             <a href="/"><li>Home</li></a>
             <a href="#about"><li>About</li></a>
             <a href="#services"><li>Service</li></a>
-            <a href="/contact"><li>Contact</li></a>
+            <a href="{{ url_for('contact') }}"><li>Contact</li></a>
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('shop') }}"><li>Shop</li></a>
+            {% endif %}
           </ul>
 
           {% if current_user.is_authenticated %}

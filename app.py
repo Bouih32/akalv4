@@ -130,6 +130,17 @@ def result():
 
     return render_template("result.html")
 
+@app.route('/manage')
+def manage():
+
+    return render_template("manage.html")
+
+
+@app.route('/shop')
+def shop():
+
+    return render_template("shop.html")
+
 
 @app.route('/land')
 @login_required
