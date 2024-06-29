@@ -92,13 +92,33 @@
             class="w-[40px] h-[40px] rounded-full"
           />
         </a>
-        <a href="{{ url_for('logout') }}">
-          <img
-            src="/static/images/icons/out.png"
-            alt="logout"
-            class="w-[18px] h-[18px]"
-          />
-        </a>
+        <div class="flex gap-[20px] items-center">
+          {% if current_user.role == 1 %}
+          <a href="{{ url_for('messages') }}">
+            <img
+              src="/static/images/icons/message.png"
+              alt="message"
+              class="w-[25px] h-[25px]"
+            />
+          </a>
+          {% else %}
+
+          <a href="{{ url_for('cart') }}">
+            <img
+              src="/static/images/icons/cart.png"
+              alt="cart"
+              class="w-[25px] h-[25px]"
+            />
+          </a>
+          {% endif %}
+          <a href="{{ url_for('logout') }}">
+            <img
+              src="/static/images/icons/out.png"
+              alt="logout"
+              class="w-[18px] h-[18px]"
+            />
+          </a>
+        </div>
       </div>
       {% else %}
       <div
@@ -162,13 +182,33 @@
             <h2 class="text-[#0C3E00] font-semibold text-[18px]">
               {{current_user.username}}
             </h2>
-            <a href="{{ url_for('logout') }}">
-              <img
-                src="/static/images/icons/out.png"
-                alt="logout"
-                class="w-[28px] h-[28px]"
-              />
-            </a>
+            <div class="flex gap-[20px] items-center">
+              {% if current_user.role == 1 %}
+              <a href="{{ url_for('messages') }}">
+                <img
+                  src="/static/images/icons/message.png"
+                  alt="message"
+                  class="w-[25px] h-[25px]"
+                />
+              </a>
+              {% else %}
+
+              <a href="{{ url_for('cart') }}">
+                <img
+                  src="/static/images/icons/cart.png"
+                  alt="cart"
+                  class="w-[25px] h-[25px]"
+                />
+              </a>
+              {% endif %}
+              <a href="{{ url_for('logout') }}">
+                <img
+                  src="/static/images/icons/out.png"
+                  alt="logout"
+                  class="w-[18px] h-[18px]"
+                />
+              </a>
+            </div>
           </div>
           {% else %}
           <div
