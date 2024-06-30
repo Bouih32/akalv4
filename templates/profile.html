@@ -15,7 +15,7 @@
     >Profile</a
   >
   {% if current_user.role == 1 %}
-  <a href="{{ url_for('manage') }}">Manage</a>
+  <a href="{{ url_for('manageFertilizers') }}">Manage</a>
   {% else %}
   <a href="{{ url_for('land') }}">My Lands</a>
   {% endif %}

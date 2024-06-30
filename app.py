@@ -130,10 +130,39 @@ def result():
 
     return render_template("result.html")
 
-@app.route('/manage')
-def manage():
+@app.route('/manageUsers')
+@login_required
+def manageUsers():
+    con = sqlite3.connect("akal.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT user_id, username, profile_path, email  FROM user")
+    users = cur.fetchall()  
+    con.close()
+    if(current_user.role == 1):
+        return render_template("manageUsers.html",users=users)
+    else:
+        return render_template("profile.html",current_user=current_user)
+    
 
-    return render_template("manage.html")
+@app.route('/deleteUsers', methods=['GET', 'POST'])
+@login_required
+def deleteUsers():
+    id=request.form['user_id']
+    con = sqlite3.connect("akal.db")
+    cur = con.cursor()
+    cur.execute("DELETE FROM user WHERE user_id = ?", (id,))
+    con.commit()
+    cur.close()
+    con.close()
+    return redirect(url_for('manageUsers'))
+    
+    
+
+@app.route('/manageFertilizers')
+def manageFertilizers():
+
+    return render_template("manageFertilizers.html")
 
 
 @app.route('/shop')
