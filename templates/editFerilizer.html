@@ -113,7 +113,8 @@
     if (
       quantity.value === "" ||
       isNaN(Number(quantity.value)) ||
-      quantity.value >= 300
+      quantity.value >= 300 ||
+      quantity.value < 0
     ) {
       if (quantity.value === "" || isNaN(Number(quantity.value))) {
         errorFeedback(quantity, "Numiric Value Obligatoty", "Quantity Value");
