@@ -212,11 +212,43 @@ def manageFertilizers():
 
 
 
-@app.route('/shop')
+@app.route('/shopAll')
 @login_required
-def shop():
+def shopAll():
+    con = sqlite3.connect("akal.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM fertilizer")
+    fertilizers = cur.fetchall()  
+    con.close()
 
-    return render_template("shop.html")
+    return render_template("shopAll.html",datas=fertilizers)
+
+
+@app.route('/shopFull')
+@login_required
+def shopFull():
+    con = sqlite3.connect("akal.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM fertilizer WHERE quantity > 0")
+    fertilizers = cur.fetchall()  
+    con.close()
+
+    return render_template("shopFull.html",datas=fertilizers)
+
+
+@app.route('/shopOut')
+@login_required
+def shopOut():
+    con = sqlite3.connect("akal.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM fertilizer WHERE quantity = ? ", (0,))
+    fertilizers = cur.fetchall()  
+    con.close()
+
+    return render_template("shopOut.html",datas=fertilizers)
 
 
 @app.route('/cart')

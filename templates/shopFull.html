@@ -1,31 +1,28 @@
 {% extends 'layout.html' %} {% block body %} {% block content %}
 <section class="noAnimation bg-darkGreen sm:py-[53px] py-[37px] text-center">
-  <h2 class="font-bold lg:text-[38px] text-[26px] text-white">Dashboard</h2>
+  <h2 class="font-bold lg:text-[38px] text-[26px] text-white">
+    Welcome To Our Shop
+  </h2>
 </section>
 
-<section
-  class="noAnimation pb-[28px] sm:pt-[50px] sm:pl-[50px] p-[30px] font-bold lg:text-[25px] text-[18px] text-brown lg:gap-[50px] sm:gap-[30px] flex justify-center sm:justify-start gap-[40px] border-b border-[#333333]"
->
-  <a href="{{ url_for('profile') }}">Profile</a>
-  <a
-    class="border-b-[5px] border-[#0C3E00] px-[20px] pb-[10px]"
-    href="{{ url_for('manageFertilizers') }}"
-    >Manage</a
-  >
-</section>
 <section
   class="font-bold sm:text-[20px] text-[14px] p-[31px] sm:px-[50px] flex sm:gap-[18px] gap-[13px] justify-center sm:justify-start"
 >
   <a
-    href="{{ url_for('manageFertilizers') }}"
-    class="text-white sm:px-[38px] px-[30px] bg-main py-[7px] rounded-[22px]"
-    >Fertiliser</a
+    href="{{ url_for('shopAll') }}"
+    class="text-[#323232] sm:px-[38px] px-[30px] bg-[#D9D9D9] py-[7px] rounded-[22px]"
+    >All</a
+  >
+  <a
+    href="{{ url_for('shopFull') }}"
+    class="text-white sm:px-[30px] px-[26px] bg-main py-[7px] rounded-[22px]"
+    >Available</a
   >
 
   <a
-    href="{{ url_for('manageUsers') }}"
-    class="text-[#323232] sm:px-[50px] px-[37px] bg-[#D9D9D9] py-[7px] rounded-[22px]"
-    >Users</a
+    href="{{ url_for('shopOut') }}"
+    class="text-[#323232] sm:px-[15px] px-[17px] bg-[#D9D9D9] py-[7px] rounded-[22px]"
+    >Out Of Stock</a
   >
 </section>
 <section
@@ -42,7 +39,7 @@
     >
       <input type="hidden" name="fertilizer_name" value="{{ data.name}}" />
       <button type="submit">
-        <img src="/static/images/icons/ferEdit.png" alt="edit" />
+        <img src="/static/images/icons/greenCart.png" alt="cart" />
       </button>
     </form>
     <img src="{{data.land_src}}" alt="fertilizer" class="h-[204px] w-full" />
