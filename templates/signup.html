@@ -112,75 +112,62 @@
     e.preventDefault();
     let hasError = false;
 
+    if (password.value !== password2.value) {
+      errorFeedback(password2, "Passwords Don't Match", "Your Password");
+      let hasError = true;
+    }
+
     if (
-      password.value !== password2.value ||
       name.value === "" ||
       !isNaN(Number(name.value)) ||
-      email.value === "" ||
-      password.value === ""
+      name.value.length > 10
     ) {
-      if (password.value !== password2.value) {
-        errorFeedback(password2, "Passwords Don't Match", "Your Password");
-        let hasError = true;
+      if (name.value.length > 10) {
+        errorFeedback(
+          name,
+          "Username can't be Over 10 Characters ",
+          "Enter Your Username"
+        );
+      } else {
+        errorFeedback(name, "Please Enter A Valid Username", "Adam");
       }
 
-      if (
-        name.value === "" ||
-        isNaN(Number(name.value)) ||
-        name.value.length > 10
-      ) {
-        if (name.value.length > 10) {
-          errorFeedback(
-            name,
-            "Username can't be Over 10 Characters ",
-            "Enter Your Username"
-          );
-        } else {
-          errorFeedback(name, "Please Enter A Valid Username", "Adam");
-        }
-
-        let hasError = true;
-      }
-
-      if (
-        email.value.length > 40 ||
-        email.value === "" ||
-        !emailPattern.test(email.value)
-      ) {
-        if (email.value.length > 40) {
-          errorFeedback(
-            email,
-            "Email Can't Be More than 40 Characters",
-            "Enter Email"
-          );
-        } else if (email.value === "") {
-          errorFeedback(email, "Email Must Not Be Empty", "Enter Email");
-        } else {
-          errorFeedback(email, "Please Enter A Valid Email ", "Enter Email");
-        }
-        form_error = true;
-      }
-
-      if (password.value === "" || password.value.length > 30) {
-        if (password.value.length > 30) {
-          errorFeedback(
-            password,
-            "Password Cant't Be Over 30 Characters",
-            "Your Password"
-          );
-        } else {
-          errorFeedback(
-            password,
-            "Please Enter Your Password",
-            "Your Password"
-          );
-        }
-
-        let hasError = true;
-      }
-
-      return;
+      let hasError = true;
     }
+
+    if (
+      email.value.length > 40 ||
+      email.value === "" ||
+      !emailPattern.test(email.value)
+    ) {
+      if (email.value.length > 40) {
+        errorFeedback(
+          email,
+          "Email Can't Be More than 40 Characters",
+          "Enter Email"
+        );
+      } else if (email.value === "") {
+        errorFeedback(email, "Email Must Not Be Empty", "Enter Email");
+      } else {
+        errorFeedback(email, "Please Enter A Valid Email ", "Enter Email");
+      }
+      form_error = true;
+    }
+
+    if (password.value === "" || password.value.length > 30) {
+      if (password.value.length > 30) {
+        errorFeedback(
+          password,
+          "Password Cant't Be Over 30 Characters",
+          "Your Password"
+        );
+      } else {
+        errorFeedback(password, "Please Enter Your Password", "Your Password");
+      }
+
+      let hasError = true;
+    }
+
     if (!hasError) {
       form.submit();
     }
