@@ -161,8 +161,17 @@ def deleteUsers():
 
 @app.route('/manageFertilizers')
 def manageFertilizers():
+    con = sqlite3.connect("akal.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM fertilizer")
+    fertilizers = cur.fetchall()  
+    con.close()
+    if(current_user.role == 1):
+        return render_template("manageFertilizers.html" , datas=fertilizers)
+    else:
+        return render_template("profile.html",current_user=current_user)
 
-    return render_template("manageFertilizers.html")
 
 
 @app.route('/shop')
