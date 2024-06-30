@@ -136,7 +136,7 @@ def manageUsers():
     con = sqlite3.connect("akal.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
-    cur.execute("SELECT user_id, username, profile_path, email  FROM user")
+    cur.execute("SELECT user_id, username, role, profile_path, email  FROM user")
     users = cur.fetchall()  
     con.close()
     if(current_user.role == 1):

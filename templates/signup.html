@@ -110,11 +110,11 @@
 
   submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    let hasError = false;
+    let form_error = false;
 
     if (password.value !== password2.value) {
       errorFeedback(password2, "Passwords Don't Match", "Your Password");
-      let hasError = true;
+      let form_error = true;
     }
 
     if (
@@ -132,7 +132,7 @@
         errorFeedback(name, "Please Enter A Valid Username", "Adam");
       }
 
-      let hasError = true;
+      let form_error = true;
     }
 
     if (
@@ -165,10 +165,10 @@
         errorFeedback(password, "Please Enter Your Password", "Your Password");
       }
 
-      let hasError = true;
+      let form_error = true;
     }
 
-    if (!hasError) {
+    if (!form_error) {
       form.submit();
     }
   });
