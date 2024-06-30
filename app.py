@@ -66,6 +66,43 @@ def profile():
 def add():
     return render_template("add.html")
 
+
+
+@app.route('/editFerilizer', methods=['GET', 'POST'])
+def editFerilizer():
+    if request.method == 'POST':
+    
+            fertilizer_name = request.form['fertilizer_name']
+            con = sqlite3.connect("akal.db")
+            con.row_factory = sqlite3.Row
+            cur = con.cursor()
+            cur.execute("SELECT * FROM fertilizer WHERE name = ?", (fertilizer_name,))
+            fertilizer = cur.fetchone()
+            con.commit()
+            con.close()
+            
+            if land:
+                return render_template('editFerilizer.html', info=fertilizer)
+    return render_template('editFerilizer.html')
+
+@app.route('/editRequest', methods=['GET', 'POST'])
+def editRequest():
+    if request.method == 'POST':
+            con = sqlite3.connect("akal.db")
+            cur = con.cursor()
+            fertilizer_name = request.form['fertilizer_name']
+            cur.execute("SELECT description FROM fertilizer WHERE name = ?", (fertilizer_name,))
+            original = cur.fetchone()
+            description = request.form['description']  if request.form['description'] else original[0]
+            price = request.form['price']
+            quantity = request.form['quantity']
+            cur.execute("UPDATE fertilizer SET price = ?, quantity = ? ,description = ? WHERE name = ?", (price,quantity,description, fertilizer_name))
+            con.commit()
+            con.close()
+            return redirect(url_for('manageFertilizers'))
+            
+    
+
 @app.route('/edit_user', methods=['GET', 'POST'])
 @login_required
 def edit_user():

@@ -36,11 +36,12 @@
     class="lg:w-[500px] sm:w-[324px] w-[314px] h-[400px] rounded-[10px] shadow-4xl relative"
   >
     <form
-      action=""
+      action="{{ url_for('editFerilizer') }}"
+      method="post"
       class="absolute top-[13px] right-[13px] rounded-[6px] bg-[#F6F6F6] p-[7px] flex justify-center items-center"
     >
       <input type="hidden" name="fertilizer_name" value="{{ data.name}}" />
-      <button>
+      <button type="submit">
         <img src="/static/images/icons/ferEdit.png" alt="edit" />
       </button>
     </form>

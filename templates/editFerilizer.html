@@ -1,0 +1,141 @@
+{% extends 'formLayout.html' %} {% block body %}
+<section
+  class="font-poppins bg-lightBg flex justify-center items-center sm:py-[60px]"
+>
+  <form
+    action="{{ url_for('editRequest') }}"
+    method="post"
+    class="font-medium lg:p-[50px] sm:px-[34px] px-[30px] pt-[50px] leading-[12px] lg:gap-[30px] gap-[20px] flex flex-col lg:w-[700px] sm:w-[668px] w-[100%] bg-white rounded-[10px] shadow-3xl pb-[50px]"
+    id="form"
+  >
+    <h2 class="text-[#4B2D00] font-bold text-[32px] mb-[30px]">
+      Edit Fertilizer
+    </h2>
+
+    <input
+      type="hidden"
+      name="fertilizer_name"
+      id="fertilizer_name"
+      value="{{info.name}}"
+    />
+    <div class="flex flex-col gap-[15px]">
+      <label for="price" class="lg:text-[20px] text-[18px]">Price</label>
+      <input
+        type="text"
+        id="price"
+        name="price"
+        class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+        value="{{info.price}}"
+        placeholder="{{info.price}}"
+      />
+    </div>
+    <div class="flex flex-col gap-[15px]">
+      <label for="quantity" class="lg:text-[20px] text-[18px]">Quantity</label>
+      <input
+        type="text"
+        id="quantity"
+        name="quantity"
+        class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none"
+        value="{{info.quantity}}"
+        placeholder="{{info.quantity}}"
+      />
+    </div>
+
+    <div class="flex flex-col gap-[15px]">
+      <label for="description" class="lg:text-[20px] text-[18px]"
+        >Description</label
+      >
+      <textarea
+        id="description"
+        name="description"
+        class="bg-[#EFEEEE] rounded-[10px] py-[16px] pl-[12px] outline-none sm:h-[186px] h-[180px] resize-none"
+        value="{{info.description}}"
+        placeholder="{{info.description}}"
+      ></textarea>
+    </div>
+
+    <div class="flex sm:gap-[15px] gap-[10px] self-end">
+      <a
+        href="{{ url_for('land') }}"
+        class="bg-secondary font-semibold text-[16px] sm:text-[20px] rounded-[5px] text-white sm:py-[20px] sm:px-[35px] px-[25px] py-[18px]"
+      >
+        Back
+      </a>
+      <button
+        type="submit"
+        class="bg-main font-semibold text-[16px] sm:text-[20px] rounded-[5px] text-white sm:py-[20px] sm:px-[35px] px-[25px] py-[18px]"
+        id="submitBtn"
+      >
+        Edit
+      </button>
+    </div>
+  </form>
+</section>
+<script>
+  const form = document.querySelector("#form");
+  const submitBtn = document.querySelector("#submitBtn");
+  const price = document.querySelector("#price");
+  const quantity = document.querySelector("#quantity");
+  const description = document.querySelector("#description");
+
+  function errorFeedback(ele, message, original) {
+    ele.classList.add("border", "border-red-500", "placeholder:text-red-500");
+    ele.value = "";
+    ele.placeholder = message;
+    setTimeout(() => {
+      ele.classList.remove(
+        "border",
+        "border-red-500",
+        "placeholder:text-red-500"
+      );
+      ele.placeholder = original;
+    }, 3000);
+  }
+
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let hasError = false;
+
+    if (
+      price.value === "" ||
+      isNaN(Number(price.value)) ||
+      price.value >= 1000 ||
+      price.value < 200
+    ) {
+      if (price.value === "" || isNaN(Number(price.value))) {
+        errorFeedback(price, "Numiric Value Obligatoty", "Price Value");
+      } else {
+        errorFeedback(price, "Wooow There Slow Down", "Price Value");
+      }
+      hasError = true;
+    }
+
+    if (
+      quantity.value === "" ||
+      isNaN(Number(quantity.value)) ||
+      quantity.value >= 300
+    ) {
+      if (quantity.value === "" || isNaN(Number(quantity.value))) {
+        errorFeedback(quantity, "Numiric Value Obligatoty", "Quantity Value");
+      } else {
+        errorFeedback(quantity, "Wooow There Slow Down", "Quantity Value");
+      }
+      hasError = true;
+    }
+
+    if (description.value.length > 100) {
+      errorFeedback(
+        description,
+        "Wooow There Slow Down",
+        "Description Bellow 100 Characters"
+      );
+
+      hasError = true;
+    }
+
+    if (!hasError) {
+      form.submit();
+    }
+  });
+</script>
+{% endblock %}
