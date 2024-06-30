@@ -160,6 +160,7 @@ def deleteUsers():
     
 
 @app.route('/manageFertilizers')
+@login_required
 def manageFertilizers():
     con = sqlite3.connect("akal.db")
     con.row_factory = sqlite3.Row
@@ -175,17 +176,20 @@ def manageFertilizers():
 
 
 @app.route('/shop')
+@login_required
 def shop():
 
     return render_template("shop.html")
 
 
 @app.route('/cart')
+@login_required
 def cart():
 
     return render_template("cart.html")
 
 @app.route('/messages')
+@login_required
 def messages():
 
     return render_template("messages.html")
