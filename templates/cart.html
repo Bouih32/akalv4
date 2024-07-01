@@ -1,3 +1,37 @@
 {% extends 'layout.html' %} {% block body %} {% block content %}
-<h1>cart</h1>
+<section class="noAnimation bg-darkGreen sm:py-[53px] py-[37px] text-center">
+  <h2 class="font-bold lg:text-[38px] text-[26px] text-white">My Products</h2>
+</section>
+
+<section
+  class="flex px-[30px] sm:px-[50px] gap-[20px] lg:gap-[30px] py-[30px] flex-wrap"
+>
+  {% for data in datas %}
+  <div
+    class="noAnimation lg:w-[500px] sm:w-[324px] w-[314px] h-[350px] rounded-[10px] shadow-4xl overflow-hidden"
+  >
+    <img src="{{data.land_src}}" alt="fertilizer" class="h-[204px] w-full" />
+    <div class="py-[14px] px-[22px] space-y-[15px]">
+      <h2 class="text-[25px] font-bold leading-[24px] text-[#121212]">
+        {{ data.name }}
+      </h2>
+
+      <div class="flex gap-[11px] text-[11px]">
+        <span
+          class="px-[23px] py-[5px] bg-[#D9D9D9] rounded-[6px] text-[#403F3F] font-medium"
+          >Price : ${{data.price}}
+        </span>
+        <span
+          class="{{'px-[10px] py-[5px] bg-[#FE8B8B] rounded-[6px] text-[#8C0202] font-medium' if data.quantity ==0 else 'px-[10px] py-[5px] bg-[#91F278] rounded-[6px] text-[#187900] font-medium'}}"
+          >Owned ({{data.many}})
+        </span>
+      </div>
+      <p class="text-[#777777] leading-[149.88%] text-[18px] font-bold">
+        Total : ${{data.price * data.many}}
+      </p>
+    </div>
+  </div>
+
+  {% endfor %}
+</section>
 {% endblock %} {% endblock %}

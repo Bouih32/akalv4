@@ -279,15 +279,12 @@ def buyRequest():
     cur.execute("SELECT * FROM owned WHERE name = ? and user_id = ?", (name,user))
     fertilizer = cur.fetchone()
     if(fertilizer) :
-        print ("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",fertilizer)
         cur.execute('UPDATE owned SET many = ? WHERE user_id = ? AND name = ?', (fertilizer[2] + many, user,name))
-
     else :
         cur.execute("INSERT INTO owned (user_id, name, many) VALUES (?, ?, ?)", (user, name, many))
     cur.execute("SELECT quantity FROM fertilizer WHERE name = ? ", (name,))
     old = cur.fetchall() 
     oldNumber = int(old[0][0])
-    print("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",oldNumber)
     cur.execute('UPDATE fertilizer SET quantity = ? WHERE name = ?', (oldNumber - many,name))
     con.commit()
     con.close()
@@ -298,8 +295,31 @@ def buyRequest():
 @app.route('/cart')
 @login_required
 def cart():
+    user = current_user.id
+    con = sqlite3.connect("akal.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute('''
+        SELECT 
+            owned.name, 
+            owned.many, 
+            fertilizer.price, 
+            fertilizer.land_src
+        FROM 
+            owned
+        JOIN 
+            fertilizer 
+        ON 
+            owned.name = fertilizer.name
+        WHERE 
+            owned.user_id = ?
+    ''', (user,))
+    
+    results = cur.fetchall()
+    con.close()
+    print(results)
 
-    return render_template("cart.html")
+    return render_template("cart.html",datas=results)
 
 @app.route('/messages')
 @login_required
