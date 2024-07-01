@@ -33,12 +33,15 @@
     class="noAnimation lg:w-[500px] sm:w-[324px] w-[314px] h-[400px] rounded-[10px] shadow-4xl relative"
   >
     <form
-      action="{{ url_for('editFerilizer') }}"
+      action="{{ url_for('buy') }}"
       method="post"
       class="absolute top-[13px] right-[13px] rounded-[6px] bg-[#F6F6F6] p-[7px] flex justify-center items-center"
     >
       <input type="hidden" name="fertilizer_name" value="{{ data.name}}" />
-      <button type="submit">
+      <button
+        type="submit"
+        {% if data.quantity == 0 %}disabled{% endif %}
+      >
         <img src="/static/images/icons/greenCart.png" alt="cart" />
       </button>
     </form>

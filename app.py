@@ -250,6 +250,11 @@ def shopOut():
 
     return render_template("shopOut.html",datas=fertilizers)
 
+@app.route('/buy',methods=['POST','GET'])
+def buy():
+
+    return render_template("buy.html")
+
 
 @app.route('/cart')
 @login_required
