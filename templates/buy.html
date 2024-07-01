@@ -4,8 +4,11 @@
 </section>
 <div class="flex justify-center items-center lg:h-[100vh] py-[50px]">
   <form
+    action="{{url_for('buyRequest')}}"
+    method="post"
     class="flex flex-col lg:flex-row lg:gap-[115px] sm:gap-[46px] gap-[27px] items-center sm:px-[50px] px-[30px]"
   >
+    <input type="hidden" value="{{info.name}}" name="name" />
     <div
       class="sm:h-[600px] lg:w-[500px] sm:w-[670px] w-[316px] h-[383px] bg-lightBg rounded flex justify-center items-center"
     >
@@ -24,9 +27,12 @@
         <h2 class="text-[24px] font-semibold leading-[24px]">{{info.name}}</h2>
         <div class="flex gap-[8px] items-center">
           <img src="/static/images/icons/stars.png" alt="reviews" />
-          <span class="text-[14px] text-black/50 leading-[21px]"
-            >(150 Reviews)</span
-          >
+          <input
+            id="stock"
+            readonly
+            value="({{info.quantity}} In Stock)"
+            class="text-[14px] text-black/50 leading-[21px] outline-none"
+          />
         </div>
         <span class="text-[24px] leading-[24px]">${{info.price}}</span>
         <p class="text-[14px] leading-[21px]">{{info.description}}</p>
@@ -36,18 +42,24 @@
       >
         <div class="flex gap-[16px] mt-[24px] sm:mt-0">
           <div class="flex h-[44px]">
-            <div
+            <button
+              id="minus"
               class="cursor-pointer py-[10px] px-[8px] border border-black/50 rounded-l"
             >
               <img src="/static/images/icons/icon-minus.png" alt="minus" />
-            </div>
-            <span
-              class="px-[33px] py-[8px] border-y border-black/50 text-[20px] leading-[28px] font-medium"
-              >2</span
+            </button>
+            <input
+              name="many"
+              id="many"
+              value="1"
+              class="pl-[30px] py-[8px] border-y border-black/50 text-[20px] leading-[28px] font-medium outline-none w-[80px]"
+            />
+            <button
+              id="plus"
+              class="cursor-pointer py-[10px] px-[8px] bg-main rounded-r"
             >
-            <div class="cursor-pointer py-[10px] px-[8px] bg-main rounded-r">
               <img src="/static/images/icons/plus_icon.png" alt="plus" />
-            </div>
+            </button>
           </div>
           <button
             type="submit"
@@ -90,4 +102,31 @@
     </section>
   </form>
 </div>
+
+<script>
+  const plus = document.querySelector("#plus");
+  const minus = document.querySelector("#minus");
+  const many = document.querySelector("#many");
+  const stock = document.querySelector("#stock");
+  const stockValue = Number(stock.value.split(" ")[0].slice(1));
+
+  plus.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    oldValue = Number(many.value);
+    if (oldValue < stockValue) {
+      oldValue += 1;
+      many.value = oldValue;
+    }
+  });
+
+  minus.addEventListener("click", (e) => {
+    e.preventDefault();
+    oldValue = Number(many.value);
+    if (oldValue > 1) {
+      oldValue -= 1;
+      many.value = oldValue;
+    }
+  });
+</script>
 {% endblock %} {% endblock %}

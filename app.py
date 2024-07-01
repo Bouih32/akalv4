@@ -268,6 +268,32 @@ def buy():
             return render_template('buy.html', info=fertilizer)
 
 
+@app.route('/buyRequest',methods=['POST','GET'])
+@login_required
+def buyRequest():
+    many = float(request.form['many'])
+    name = request.form['name']
+    user =  current_user.id
+    con = sqlite3.connect("akal.db")
+    cur = con.cursor()
+    cur.execute("SELECT * FROM owned WHERE name = ? and user_id = ?", (name,user))
+    fertilizer = cur.fetchone()
+    if(fertilizer) :
+        print ("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",fertilizer)
+        cur.execute('UPDATE owned SET many = ? WHERE user_id = ? AND name = ?', (fertilizer[2] + many, user,name))
+
+    else :
+        cur.execute("INSERT INTO owned (user_id, name, many) VALUES (?, ?, ?)", (user, name, many))
+    cur.execute("SELECT quantity FROM fertilizer WHERE name = ? ", (name,))
+    old = cur.fetchall() 
+    oldNumber = int(old[0][0])
+    print("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",oldNumber)
+    cur.execute('UPDATE fertilizer SET quantity = ? WHERE name = ?', (oldNumber - many,name))
+    con.commit()
+    con.close()
+    
+    return redirect(url_for('shopAll'))
+
 
 @app.route('/cart')
 @login_required
