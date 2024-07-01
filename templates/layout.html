@@ -71,7 +71,7 @@
         ><img src="/static/images/logobrown.png" alt="logo"
       /></a>
       <ul
-        class="hidden sm:flex lg:gap-[93px] gap-[43px] text-brown lg:text-[18px] md:text-[16px] font-semibold"
+        class="hidden sm:flex lg:gap-[93px] gap-[20px] text-brown lg:text-[18px] md:text-[16px] font-semibold"
       >
         <a href="/"><li>Home</li></a>
         <a href="#about"><li>About</li></a>
@@ -83,7 +83,9 @@
       </ul>
 
       {% if current_user.is_authenticated %}
-      <div class="hidden sm:flex gap-[20px] justify-center items-center">
+      <div
+        class="hidden sm:flex lg:gap-[20px] gap-[10px] justify-center items-center"
+      >
         <h2 class="text-[#0C3E00] font-semibold">{{current_user.username}}</h2>
         <a href="{{ url_for('profile') }}">
           <img
@@ -92,7 +94,7 @@
             class="w-[40px] h-[40px] rounded-full"
           />
         </a>
-        <div class="flex gap-[20px] items-center">
+        <div class="flex lg:gap-[20px] gap-[10px] items-center">
           {% if current_user.role == 1 %}
           <a href="{{ url_for('messages') }}">
             <img

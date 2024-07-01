@@ -128,6 +128,7 @@ def edit_user():
     return render_template('profile.html')
 
 @app.route('/edit', methods=['GET', 'POST'])
+@login_required
 def edit():
     if request.method == 'POST':
     
@@ -251,9 +252,21 @@ def shopOut():
     return render_template("shopOut.html",datas=fertilizers)
 
 @app.route('/buy',methods=['POST','GET'])
+@login_required
 def buy():
+    if request.method == 'POST':
+        name = request.form['fertilizer_name']
+        con = sqlite3.connect("akal.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM fertilizer WHERE name = ?", (name,))
+        fertilizer = cur.fetchone()
+        con.commit()
+        con.close()
+            
+        if fertilizer:
+            return render_template('buy.html', info=fertilizer)
 
-    return render_template("buy.html")
 
 
 @app.route('/cart')

@@ -1,3 +1,93 @@
-{% extends 'formLayout.html' %} {% block body %} {% block content %}
-<h1>BUUUUYYYY</h1>
+{% extends 'layout.html' %} {% block body %} {% block content %}
+<section class="noAnimation bg-darkGreen sm:py-[53px] py-[37px] text-center">
+  <h2 class="font-bold lg:text-[38px] text-[26px] text-white">Buy Product</h2>
+</section>
+<div class="flex justify-center items-center lg:h-[100vh] py-[50px]">
+  <form
+    class="flex flex-col lg:flex-row lg:gap-[115px] sm:gap-[46px] gap-[27px] items-center sm:px-[50px] px-[30px]"
+  >
+    <div
+      class="sm:h-[600px] lg:w-[500px] sm:w-[670px] w-[316px] h-[383px] bg-lightBg rounded flex justify-center items-center"
+    >
+      <img
+        src="{{info.results_src}}"
+        alt="fetilizer"
+        class="sm:w-[342px] sm:h-[484px] w-[218.31px] h-[308.953px]"
+      />
+    </div>
+    <section
+      class="lg:w-[403px] lg:divide-y-[1px] lg:divide-x-0 sm:divide-x-[1px] sm:divide-black flex lg:flex-col sm:flex-row flex-col justify-center"
+    >
+      <div
+        class="flex flex-col gap-[15px] lg:pb-[46px] sm:w-[50%] lg:w-full sm:pr-[19px] lg:pr-0 pr-0"
+      >
+        <h2 class="text-[24px] font-semibold leading-[24px]">{{info.name}}</h2>
+        <div class="flex gap-[8px] items-center">
+          <img src="/static/images/icons/stars.png" alt="reviews" />
+          <span class="text-[14px] text-black/50 leading-[21px]"
+            >(150 Reviews)</span
+          >
+        </div>
+        <span class="text-[24px] leading-[24px]">${{info.price}}</span>
+        <p class="text-[14px] leading-[21px]">{{info.description}}</p>
+      </div>
+      <div
+        class="flex flex-col lg:gap-[47px] sm:gap-[23px] gap-[36px] lg:pt-[46px] sm:pl-[19px] lg:pl-0 pl-0"
+      >
+        <div class="flex gap-[16px] mt-[24px] sm:mt-0">
+          <div class="flex h-[44px]">
+            <div
+              class="cursor-pointer py-[10px] px-[8px] border border-black/50 rounded-l"
+            >
+              <img src="/static/images/icons/icon-minus.png" alt="minus" />
+            </div>
+            <span
+              class="px-[33px] py-[8px] border-y border-black/50 text-[20px] leading-[28px] font-medium"
+              >2</span
+            >
+            <div class="cursor-pointer py-[10px] px-[8px] bg-main rounded-r">
+              <img src="/static/images/icons/plus_icon.png" alt="plus" />
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="bg-main h-[44px] rounded font-bold leading-[24px] text-white py-[10px] px-[34px] sm:px-[41px] lg:px-[48px] text-nowrap"
+          >
+            Buy Now
+          </button>
+        </div>
+        <div class="sm:divide-y-[1px] sm:divide-black">
+          <section
+            class="flex gap-[16px] items-center lg:pb-[16px] pb-[10px] mb-[14px] sm:mb-0"
+          >
+            <img
+              src="/static/images/icons/van.png"
+              alt="van"
+              class="w-[40px] h-[40px]"
+            />
+            <div class="space-y-[8px] font-medium">
+              <h3 class="leading-[24px]">Free Delivery</h3>
+              <p class="text-[12px] leading-[18px]">
+                We Provide Free Delivery Throughout Morocco.
+              </p>
+            </div>
+          </section>
+          <section class="flex gap-[16px] items-center lg:pt-[16px] pt-[10px]">
+            <img
+              src="/static/images/icons/return.png"
+              alt="van"
+              class="w-[40px] h-[40px]"
+            />
+            <div class="space-y-[8px] font-medium">
+              <h3 class="leading-[24px]">Return Delivery</h3>
+              <p class="text-[12px] leading-[18px]">
+                Free 30 Days Delivery Returns. Details
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
 {% endblock %} {% endblock %}
