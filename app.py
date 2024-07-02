@@ -52,7 +52,7 @@ def index():
 
     return render_template("index.html",length=length)
 
-
+@login_required
 def getCartItems():
     con = sqlite3.connect("akal.db")
     con.row_factory = sqlite3.Row
