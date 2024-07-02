@@ -112,9 +112,9 @@
     e.preventDefault();
     let form_error = false;
 
-    if (password.value !== password2.value) {
+    if (password.value !== password2.value || password2.value === "") {
       errorFeedback(password2, "Passwords Don't Match", "Your Password");
-      let form_error = true;
+      form_error = true;
     }
 
     if (
@@ -132,7 +132,7 @@
         errorFeedback(name, "Please Enter A Valid Username", "Adam");
       }
 
-      let form_error = true;
+      form_error = true;
     }
 
     if (
@@ -165,7 +165,7 @@
         errorFeedback(password, "Please Enter Your Password", "Your Password");
       }
 
-      let form_error = true;
+      form_error = true;
     }
 
     if (!form_error) {

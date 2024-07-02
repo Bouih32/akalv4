@@ -48,22 +48,50 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
+    length = getCartItems()
 
-    return render_template("index.html")
+    return render_template("index.html",length=length)
+
+
+def getCartItems():
+    con = sqlite3.connect("akal.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute('''
+        SELECT 
+            owned.name, 
+            owned.many, 
+            fertilizer.price, 
+            fertilizer.land_src
+        FROM 
+            owned
+        JOIN 
+            fertilizer 
+        ON 
+            owned.name = fertilizer.name
+        WHERE 
+            owned.user_id = ?
+    ''', (current_user.id,))
+    
+    results = cur.fetchall()
+    con.close()
+    length = len(results)
+    return length
 
 @app.route('/contact')
 def contact():
-
-    return render_template("contact.html")
+    length = getCartItems()
+    return render_template("contact.html",length=length)
 
 @app.route('/profile')
 @login_required
 def profile():
-
-    return render_template("profile.html",current_user=current_user)
+    length = getCartItems()
+    return render_template("profile.html",current_user=current_user,length=length)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
+    
     return render_template("add.html")
 
 
@@ -222,8 +250,9 @@ def shopAll():
     cur.execute("SELECT * FROM fertilizer")
     fertilizers = cur.fetchall()  
     con.close()
+    length = getCartItems()
 
-    return render_template("shopAll.html",datas=fertilizers)
+    return render_template("shopAll.html",datas=fertilizers,length=length)
 
 
 @app.route('/shopFull')
@@ -235,8 +264,9 @@ def shopFull():
     cur.execute("SELECT * FROM fertilizer WHERE quantity > 0")
     fertilizers = cur.fetchall()  
     con.close()
+    length = getCartItems()
 
-    return render_template("shopFull.html",datas=fertilizers)
+    return render_template("shopFull.html",datas=fertilizers,length=length)
 
 
 @app.route('/shopOut')
@@ -248,8 +278,9 @@ def shopOut():
     cur.execute("SELECT * FROM fertilizer WHERE quantity = ? ", (0,))
     fertilizers = cur.fetchall()  
     con.close()
+    length = getCartItems()
 
-    return render_template("shopOut.html",datas=fertilizers)
+    return render_template("shopOut.html",datas=fertilizers,length=length)
 
 @app.route('/buy',methods=['POST','GET'])
 @login_required
@@ -317,9 +348,9 @@ def cart():
     
     results = cur.fetchall()
     con.close()
-    print(results)
+    length = len(results)
 
-    return render_template("cart.html",datas=results)
+    return render_template("cart.html",datas=results,length=length)
 
 @app.route('/messages')
 @login_required
@@ -342,8 +373,9 @@ def land():
         """, (current_user.id,))
     land = cur.fetchall()  
     con.close()
+    length=getCartItems()
     
-    return render_template("land.html",datas=land)
+    return render_template("land.html",datas=land,length=length)
     
 
 @app.route('/login', methods=['GET', 'POST'])

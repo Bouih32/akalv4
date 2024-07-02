@@ -18,12 +18,15 @@
       <p class="sm:mb-[15px] mb-[30px] text-[18px] text-[#959393]">
         {{data.description}}
       </p>
-      <a
-        href="{{data.buy_link}}"
-        target="_blank"
-        class="py-[8px] px-[100px] rounded-[10px] text-white font-bold text-[22px] bg-main"
-        >Buy</a
-      >
+      <form action="{{url_for('buy')}}" method="post">
+        <input type="hidden" name="fertilizer_name" value="{{data.name}}" />
+        <button
+          type="submit"
+          class="py-[8px] px-[100px] rounded-[10px] text-white font-bold text-[22px] bg-main"
+        >
+          Buy
+        </button>
+      </form>
     </div>
   </div>
 </section>

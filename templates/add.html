@@ -147,10 +147,10 @@
     e.preventDefault();
     let hasError = false;
 
-    if (name.value === "") {
+    if (name.value === "" || name.value.length > 10) {
       errorFeedback(
         name,
-        "Please Enter Your Land's Name",
+        "Land Name 10 Characters Or Less",
         "Add Your Land's Name"
       );
       hasError = true;

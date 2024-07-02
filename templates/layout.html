@@ -105,13 +105,20 @@
           </a>
           {% else %}
 
-          <a href="{{ url_for('cart') }}">
-            <img
-              src="/static/images/icons/cart.png"
-              alt="cart"
-              class="w-[25px] h-[25px]"
-            />
-          </a>
+          <div class="relative">
+            <a href="{{ url_for('cart') }} ">
+              <img
+                src="/static/images/icons/cart.png"
+                alt="cart"
+                class="w-[25px] h-[25px]"
+              />
+            </a>
+            <span
+              class="absolute bg-red-500 rounded-full top-0 right-0 w-[10px] h-[10px] text-[6px] text-white font-bold flex justify-center items-center"
+              >{{length}}</span
+            >
+          </div>
+
           {% endif %}
           <a href="{{ url_for('logout') }}">
             <img
@@ -195,13 +202,19 @@
               </a>
               {% else %}
 
-              <a href="{{ url_for('cart') }}">
-                <img
-                  src="/static/images/icons/cart.png"
-                  alt="cart"
-                  class="w-[25px] h-[25px]"
-                />
-              </a>
+              <div class="relative">
+                <a href="{{ url_for('cart') }} ">
+                  <img
+                    src="/static/images/icons/cart.png"
+                    alt="cart"
+                    class="w-[25px] h-[25px]"
+                  />
+                </a>
+                <span
+                  class="absolute bg-red-500 rounded-full top-0 right-0 w-[10px] h-[10px] text-[6px] text-white font-bold flex justify-center items-center"
+                  >{{length}}</span
+                >
+              </div>
               {% endif %}
               <a href="{{ url_for('logout') }}">
                 <img
