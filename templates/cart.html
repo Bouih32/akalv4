@@ -3,6 +3,7 @@
   <h2 class="font-bold lg:text-[38px] text-[26px] text-white">My Products</h2>
 </section>
 
+{% if datas %}
 <section
   class="flex px-[30px] sm:px-[50px] gap-[20px] lg:gap-[30px] py-[30px] flex-wrap"
 >
@@ -34,4 +35,20 @@
 
   {% endfor %}
 </section>
-{% endblock %} {% endblock %}
+{% else %}
+<section class="flex justify-center items-center sm:h-[100vh] py-[46px]">
+  <div class="font-bold flex flex-col justify-center items-center">
+    <img
+      src="/static/images/empty2.png"
+      alt="404"
+      class="sm:h-[211px] sm:w-[329px]"
+    />
+    <span class="text-brown lg:text-[70px] sm:text-[50px] text-[30px]"
+      >No Producs Owned</span
+    >
+    <p class="sm:text-[24px] text-[18px] text-center">
+      You currently have no products, <br />please visite Our Shop.
+    </p>
+  </div>
+</section>
+{% endif %} {% endblock %} {% endblock %}
