@@ -208,12 +208,8 @@
       form_error = true;
     }
 
-    if (
-      age.value === "" ||
-      isNaN(Number(age.value)) ||
-      Number(age.value) > 100
-    ) {
-      if (age.value === "" || isNaN(Number(age.value))) {
+    if (isNaN(Number(age.value)) || Number(age.value) > 100) {
+      if (isNaN(Number(age.value))) {
         errorFeedback(age, "Please Enter Your Age Number", "Enter Your Age");
       } else {
         errorFeedback(age, "You Can't Be That Old :) ", "Enter Your Age");

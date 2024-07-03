@@ -21,10 +21,11 @@
       <form action="{{url_for('buy')}}" method="post">
         <input type="hidden" name="fertilizer_name" value="{{data.name}}" />
         <button
+        {% if data.quantity == 0 %}disabled{% endif %}
           type="submit"
-          class="py-[8px] px-[100px] rounded-[10px] text-white font-bold text-[22px] bg-main"
+          class="py-[8px]  rounded-[10px] text-white font-bold text-[22px] bg-main {{'px-[100px]' if data.quantity > 0 else 'px-[50px]'}} "
         >
-          Buy
+          {{'Buy' if data.quantity > 0 else 'Out Of Stock'}}
         </button>
       </form>
     </div>

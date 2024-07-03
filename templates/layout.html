@@ -113,10 +113,12 @@
                 class="w-[25px] h-[25px]"
               />
             </a>
+            {%if length > 0 %}
             <span
               class="absolute bg-red-500 rounded-full top-0 right-0 w-[10px] h-[10px] text-[6px] text-white font-bold flex justify-center items-center"
               >{{length}}</span
             >
+            {%endif%}
           </div>
 
           {% endif %}

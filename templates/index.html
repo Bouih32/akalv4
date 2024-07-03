@@ -3,7 +3,7 @@
   class="bg-hero bg-cover text-white lg:py-[108px] py-[146px] sm:py-[97px] text-center flex flex-col items-center relative before:absolute before:w-[100%] before:h-[100%] before:bg-black/20 before:top-0 before:left-0"
 >
   <div
-    class="lg:w-[945px] sm:w-[690px] w-[328px] lg:space-y-[42px] sm:space-y-[48px] space-y-[48px] z-40 noAnimation"
+    class="flex flex-col lg:w-[945px] sm:w-[690px] w-[328px] lg:gap-y-[42px] sm:gap-y-[48px] gap-y-[48px] z-40 noAnimation"
   >
     <h1 class="font-extrabold lg:text-[67.025px] sm:text-[47.03px] text-[24px]">
       Our Software is Now FREE
@@ -16,15 +16,15 @@
       a significant impact in our production"
     </p>
 
-    <button
-      class="bg-main lg:py-6 lg:px-[84px] sm:px-[132px] py-[22px] px-[52px] lg:rounded-[10px] rounded-[20px] sm:text-[20px] text-[18px] font-bold"
+    <a
+      href="{{ url_for('add') if current_user.is_authenticated else url_for('essai') }}"
     >
-      <a
-        href="{{ url_for('add') if current_user.is_authenticated else url_for('essai') }}"
+      <button
+        class="bg-main lg:py-6 lg:px-[84px] sm:px-[132px] py-[22px] px-[52px] lg:rounded-[10px] rounded-[20px] sm:text-[20px] text-[18px] font-bold"
       >
-        Try Our AI Now</a
-      >
-    </button>
+        Try Our AI Now
+      </button></a
+    >
   </div>
 </section>
 <section

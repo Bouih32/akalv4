@@ -33,9 +33,11 @@
 >
   {% for data in datas %}
   <div
-    class="noAnimation lg:w-[500px] sm:w-[324px] w-[314px] h-[400px] rounded-[10px] shadow-4xl relative overflow-hidden"
+    id="container"
+    class="cursor-pointer noAnimation lg:w-[500px] sm:w-[324px] w-[314px] h-[400px] rounded-[10px] shadow-4xl relative overflow-hidden"
   >
     <form
+      id="form"
       action="{{ url_for('editFerilizer') }}"
       method="post"
       class="absolute top-[13px] right-[13px] rounded-[6px] bg-[#F6F6F6] p-[7px] flex justify-center items-center"
@@ -72,4 +74,12 @@
 
   {% endfor %}
 </section>
+<script>
+  const container = document.querySelectorAll("#container");
+  container.forEach((ele) => {
+    ele.addEventListener("click", () => {
+      ele.firstElementChild.submit();
+    });
+  });
+</script>
 {% endblock %} {% endblock %}

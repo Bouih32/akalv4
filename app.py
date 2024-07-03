@@ -140,7 +140,7 @@ def edit_user():
         new_email =  request.form.get('email')
         new_name = request.form.get('name') 
         new_sex = request.form.get('sex')
-        new_age = request.form.get('age')
+        new_age = request.form.get('age') if request.form.get('age') else current_user.age
         new_about = request.form.get('about') if request.form.get('about') else current_user.about
         
         con = sqlite3.connect("akal.db")
@@ -294,9 +294,10 @@ def buy():
         fertilizer = cur.fetchone()
         con.commit()
         con.close()
+        length = getCartItems()
             
         if fertilizer:
-            return render_template('buy.html', info=fertilizer)
+            return render_template('buy.html', info=fertilizer,length=length)
 
 
 @app.route('/buyRequest',methods=['POST','GET'])

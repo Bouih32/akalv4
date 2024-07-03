@@ -100,7 +100,7 @@
       price.value === "" ||
       isNaN(Number(price.value)) ||
       price.value >= 1000 ||
-      price.value < 200
+      price.value < 1
     ) {
       if (price.value === "" || isNaN(Number(price.value))) {
         errorFeedback(price, "Numiric Value Obligatoty", "Price Value");
