@@ -503,10 +503,17 @@ def delete_image():
     con.close()
     return redirect(url_for('profile'))
 
-
 @app.route('/<path:path>')
 def notFound(path):
     return render_template("notFound.html")
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('notFound.html')
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('notFound.html')
 
 
 if __name__ == '__main__':
