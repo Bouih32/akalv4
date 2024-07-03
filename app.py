@@ -504,5 +504,10 @@ def delete_image():
     return redirect(url_for('profile'))
 
 
+@app.route('/<path:path>')
+def notFound(path):
+    return render_template("notFound.html")
+
+
 if __name__ == '__main__':
     app.run(debug=True)
