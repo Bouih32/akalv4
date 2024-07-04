@@ -115,7 +115,7 @@
             </a>
             {%if length > 0 %}
             <span
-              class="absolute bg-red-500 rounded-full top-0 right-0 w-[10px] h-[10px] text-[6px] text-white font-bold flex justify-center items-center"
+              class="absolute bg-red-500 rounded-full top-0 right-0 w-[12px] h-[12px] text-[7px] text-white font-bold flex justify-center items-center"
               >{{length}}</span
             >
             {%endif%}
@@ -171,7 +171,7 @@
         <nav
           class="flex {{ 'flex-col-reverse pt-[40px]' if current_user.is_authenticated else 'flex-col pt-[90px]' }} gap-[40px] text-center "
         >
-          <ul class="flex flex-col gap-[40px] text-brown text-[26px] font-bold">
+          <ul class="flex flex-col gap-[40px] text-brown text-[20px] font-bold">
             <a href="/"><li>Home</li></a>
             <a href="/#about"><li>About</li></a>
             <a href="/#services"><li>Service</li></a>

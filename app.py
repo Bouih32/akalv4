@@ -356,8 +356,17 @@ def cart():
 @app.route('/messages')
 @login_required
 def messages():
+    length = getCartItems()
 
-    return render_template("messages.html")
+    return render_template("messages.html",length=length)
+
+
+@app.route('/messageDetails')
+@login_required
+def messageDetails():
+    length = getCartItems()
+
+    return render_template("messageDetails.html",length=length)
 
 
 @app.route('/land')
@@ -507,13 +516,13 @@ def delete_image():
 def notFound(path):
     return render_template("notFound.html")
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('notFound.html')
+# @app.errorhandler(404)
+# def page_not_found(e):
+#     return render_template('notFound.html')
 
-@app.errorhandler(500)
-def internal_server_error(e):
-    return render_template('notFound.html')
+# @app.errorhandler(500)
+# def internal_server_error(e):
+#     return render_template('notFound.html')
 
 
 if __name__ == '__main__':
