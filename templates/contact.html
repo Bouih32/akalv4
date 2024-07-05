@@ -43,7 +43,7 @@
     class="flex flex-col justify-center items-center lg:w-[50%] sm:py-[65px] py-[54px]"
   >
     <form
-      action="https://formspree.io/f/mqazzqyj"
+      action="{{url_for('contactRequest')}}"
       method="POST"
       class="lg:space-y-[39px] sm:space-y-[45px] space-y-[25px] flex flex-col justify-center items-start sm:items-center lg:w-[650px] sm:w-[669px] w-[315px]"
       id="form"
@@ -106,22 +106,28 @@
     e.preventDefault();
     let hasError = false;
 
-    if (email.value === "" || name.value === "" || msg.value === "") {
-      if (email.value === "") {
-        errorFeedback(email, "Please Enter Your Email", "Your Email");
-        let hasError = true;
-      }
+    if (email.value === "" || email.value.length > 50) {
+      errorFeedback(email, "Please Enter A Valid Email", "Your Email");
+      hasError = true;
+    }
 
-      if (name.value === "") {
-        errorFeedback(name, "Please Enter Your Name", "Your Name");
-        let hasError = true;
-      }
+    if (name.value === "" || name.value.length > 10) {
+      errorFeedback(
+        name,
+        "Please Enter A Name Under 10 characters",
+        "Your Name"
+      );
 
-      if (msg.value === "") {
-        errorFeedback(msg, "Please Enter Your Message", "Your Message");
-        let hasError = true;
-      }
-      return;
+      hasError = true;
+    }
+
+    if (msg.value === "" || msg.value.length > 200) {
+      errorFeedback(
+        msg,
+        "Please Enter Your Message Under 200 Characters",
+        "Your Message"
+      );
+      hasError = true;
     }
 
     if (!hasError) {

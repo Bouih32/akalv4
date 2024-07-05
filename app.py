@@ -83,6 +83,21 @@ def contact():
     length = getCartItems()
     return render_template("contact.html",length=length)
 
+@app.route('/contactRequest',methods=['GET', 'POST'])
+def contactRequest():
+    if request.method == 'POST':
+        name= request.form['name']
+        email= request.form['email']
+        message= request.form['message']
+        con = sqlite3.connect("akal.db")
+        cur = con.cursor()
+        cur.execute("INSERT INTO message (name, email, message,opened) VALUES (?, ?, ?,?)", (name, email, message,0))
+        con.commit()
+        con.close()
+        return redirect(url_for('contact'))
+
+
+
 @app.route('/profile')
 @login_required
 def profile():
