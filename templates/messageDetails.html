@@ -2,11 +2,13 @@
 <section class="noAnimation bg-darkGreen sm:py-[53px] py-[37px] text-center">
   <h2 class="font-bold lg:text-[38px] text-[26px] text-white">Messages</h2>
 </section>
-<img
-  src="/static/images/icons/blackArrow.png"
-  alt="back arrow"
-  class="lg:pl-[76px] lg:pt-[15px] sm:pl-[40px] sm:pt-[40px] pl-[30px] pt-[10px] scale-50 sm:scale-100"
-/>
+<a href="{{url_for('messages')}}">
+  <img
+    src="/static/images/icons/blackArrow.png"
+    alt="back arrow"
+    class="lg:pl-[76px] lg:pt-[15px] sm:pl-[40px] sm:pt-[40px] pl-[30px] pt-[10px] scale-50 sm:scale-100"
+  />
+</a>
 <section class="flex justify-center items-center">
   <section
     class="flex justify-start items-start flex-col sm:gap-[46px] gap-[29px] pb-[50px]"
@@ -19,22 +21,17 @@
       />
       <div>
         <h3 class="font-bold sm:text-[24px] text-[16px] lg:w-[200px]">
-          Username
+          {{msg.name}}
         </h3>
-        <p class="sm:text-[24px] text-[16px] text-[#777777]">email</p>
+        <p class="sm:text-[24px] text-[16px] text-[#777777]">{{msg.email}}</p>
       </div>
     </div>
     <div
       class="rounded-[8px] bg-[#F6F6F6] lg:p-[50px] lg:w-[911px] sm:w-[661px] w-[315px] sm:px-[36px] sm:py-[50px] p-[16px]"
     >
-      <p class="text-[#777777] sm:text-[35px] text-[35px]">
-        mproves nutrient availability & reduce nutrient loss. It increases crop
-        yield by 10% to 15%mproves ,mproves nutrient availability & reduce
-        nutrient loss. It increases crop yield by 10% to 15%mproves ,mproves
-        nutrient availability & reduce nutrient loss. It increases crop yield by
-        10% to 15%mproves
-      </p>
+      <p class="text-[#777777] sm:text-[35px] text-[35px]">{{msg.message}}</p>
     </div>
   </section>
 </section>
+
 {% endblock %} {% endblock %}

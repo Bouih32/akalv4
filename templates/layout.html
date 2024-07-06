@@ -96,13 +96,21 @@
         </a>
         <div class="flex lg:gap-[20px] gap-[10px] items-center">
           {% if current_user.role == 1 %}
-          <a href="{{ url_for('messages') }}">
-            <img
-              src="/static/images/icons/message.png"
-              alt="message"
-              class="w-[25px] h-[25px]"
-            />
-          </a>
+          <div class="relative">
+            <a href="{{ url_for('messages') }} ">
+              <img
+                src="/static/images/icons/message.png"
+                alt="message"
+                class="w-[25px] h-[25px]"
+              />
+            </a>
+            {%if messagesLength > 0 %}
+            <span
+              class="absolute bg-red-500 rounded-full top-0 right-0 w-[12px] h-[12px] text-[7px] text-white font-bold flex justify-center items-center"
+              >{{messagesLength}}</span
+            >
+            {%endif%}
+          </div>
           {% else %}
 
           <div class="relative">
@@ -195,13 +203,22 @@
             </h2>
             <div class="flex gap-[20px] items-center">
               {% if current_user.role == 1 %}
-              <a href="{{ url_for('messages') }}">
-                <img
-                  src="/static/images/icons/message.png"
-                  alt="message"
-                  class="w-[25px] h-[25px]"
-                />
-              </a>
+              <div class="relative">
+                <a href="{{ url_for('messages') }} ">
+                  <img
+                    src="/static/images/icons/message.png"
+                    alt="message"
+                    class="w-[25px] h-[25px]"
+                  />
+                </a>
+                {%if messagesLength > 0 %}
+                <span
+                  class="absolute bg-red-500 rounded-full top-0 right-0 w-[12px] h-[12px] text-[7px] text-white font-bold flex justify-center items-center"
+                  >{{messagesLength}}</span
+                >
+                {%endif%}
+              </div>
+
               {% else %}
 
               <div class="relative">
@@ -212,10 +229,12 @@
                     class="w-[25px] h-[25px]"
                   />
                 </a>
+                {%if length > 0 %}
                 <span
-                  class="absolute bg-red-500 rounded-full top-0 right-0 w-[10px] h-[10px] text-[6px] text-white font-bold flex justify-center items-center"
+                  class="absolute bg-red-500 rounded-full top-0 right-0 w-[12px] h-[12px] text-[7px] text-white font-bold flex justify-center items-center"
                   >{{length}}</span
                 >
+                {%endif%}
               </div>
               {% endif %}
               <a href="{{ url_for('logout') }}">

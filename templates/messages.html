@@ -2,13 +2,15 @@
 <section class="noAnimation bg-darkGreen sm:py-[53px] py-[37px] text-center">
   <h2 class="font-bold lg:text-[38px] text-[26px] text-white">Messages</h2>
 </section>
+
+{%if msgs%}
 <section
   class="flex flex-col px-[30px] sm:px-[50px] sm:gap-[30px] gap-[13px] py-[40px] sm:py-[60px]"
 >
-  <form
-    action="{{url_for('deleteUsers')}}"
-    method="post"
-    class="noAnimation w-full bg-[#F6F6F6] rounded-[8px] flex justify-between items-center py-[12px] sm:py-[22px] px-[21px] sm:px-[36px]"
+  {% for msg in msgs %}
+  <section
+    id="container"
+    class="cursor-pointer noAnimation w-full bg-[#F6F6F6] rounded-[8px] flex justify-between items-center py-[12px] sm:py-[22px] px-[21px] sm:px-[36px]"
   >
     <div class="flex sm:gap-[24px] gap-[19px] items-center">
       <img
@@ -17,121 +19,82 @@
         class="rounded-full sm:w-[76px] sm:h-[76px] h-[52px] w-[52px]"
       />
       <h3 class="font-bold sm:text-[24px] text-[16px] lg:w-[200px]">
-        Username
+        {{msg.name}}
       </h3>
-      <p class="hidden lg:block text-[24px] text-[#777777]">email</p>
+      <p class="hidden lg:block text-[24px] text-[#777777]">{{msg.email}}</p>
     </div>
 
     <div class="flex sm:gap-[44px] gap-[14px] items-center">
-      <img
-        src="/static/images/icons/closedMessage.png"
-        alt="letter"
-        class="sm:w-[30px] sm:h-[30px] w-[16px] h-[16px]"
-      />
-      <button type="submit">
-        <img
-          src="/static/images/icons/trash.png"
-          alt="trash"
-          class="sm:w-[38px] sm:h-[38px] w-[22px] h-[22px]"
-        />
-      </button>
-    </div>
-  </form>
-  <form
-    action="{{url_for('deleteUsers')}}"
-    method="post"
-    class="noAnimation w-full bg-[#F6F6F6] rounded-[8px] flex justify-between items-center py-[12px] sm:py-[22px] px-[21px] sm:px-[36px]"
-  >
-    <div class="flex sm:gap-[24px] gap-[19px] items-center">
-      <img
-        src="/static/images/avatar.png"
-        alt="user"
-        class="rounded-full sm:w-[76px] sm:h-[76px] h-[52px] w-[52px]"
-      />
-      <h3 class="font-bold sm:text-[24px] text-[16px] lg:w-[200px]">
-        Username
-      </h3>
-      <p class="hidden lg:block text-[24px] text-[#777777]">email</p>
-    </div>
+      <form action="{{url_for('messageDetails')}}" method="post">
+        <input type="hidden" name="msg_id" value="{{msg.message_id}}" />
+        <button type="submit">
+          {% if msg.opened == 0 %}
+          <img
+            src="/static/images/icons/closedMessage.png"
+            alt="letter"
+            class="sm:w-[30px] sm:h-[30px] w-[16px] h-[16px]"
+          />
+          {% else %}
+          <img
+            src="/static/images/icons/openedMessage.png"
+            alt="letter"
+            class="sm:w-[30px] sm:h-[30px] w-[16px] h-[16px]"
+          />
 
-    <div class="flex sm:gap-[44px] gap-[14px] items-center">
-      <img
-        src="/static/images/icons/openedMessage.png"
-        alt="letter"
-        class="sm:w-[30px] sm:h-[30px] w-[16px] h-[16px]"
-      />
-      <button type="submit">
-        <img
-          src="/static/images/icons/trash.png"
-          alt="trash"
-          class="sm:w-[38px] sm:h-[38px] w-[22px] h-[22px]"
-        />
-      </button>
-    </div>
-  </form>
-  <form
-    action="{{url_for('deleteUsers')}}"
-    method="post"
-    class="noAnimation w-full bg-[#F6F6F6] rounded-[8px] flex justify-between items-center py-[12px] sm:py-[22px] px-[21px] sm:px-[36px]"
-  >
-    <div class="flex sm:gap-[24px] gap-[19px] items-center">
-      <img
-        src="/static/images/avatar.png"
-        alt="user"
-        class="rounded-full sm:w-[76px] sm:h-[76px] h-[52px] w-[52px]"
-      />
-      <h3 class="font-bold sm:text-[24px] text-[16px] lg:w-[200px]">
-        Username
-      </h3>
-      <p class="hidden lg:block text-[24px] text-[#777777]">email</p>
-    </div>
+          {%endif%}
+        </button>
+      </form>
 
-    <div class="flex sm:gap-[44px] gap-[14px] items-center">
-      <img
-        src="/static/images/icons/closedMessage.png"
-        alt="letter"
-        class="sm:w-[30px] sm:h-[30px] w-[16px] h-[16px]"
-      />
-      <button type="submit">
-        <img
-          src="/static/images/icons/trash.png"
-          alt="trash"
-          class="sm:w-[38px] sm:h-[38px] w-[22px] h-[22px]"
-        />
-      </button>
+      <form
+        action="{{url_for('deleteMessage')}}"
+        method="post"
+        class="secondaryForm"
+      >
+        <input type="hidden" name="msg_id" value="{{msg.message_id}}" />
+        <button type="submit">
+          <img
+            src="/static/images/icons/trash.png"
+            alt="trash"
+            class="sm:w-[38px] sm:h-[38px] w-[22px] h-[22px]"
+          />
+        </button>
+      </form>
     </div>
-  </form>
-  <form
-    action="{{url_for('deleteUsers')}}"
-    method="post"
-    class="noAnimation w-full bg-[#F6F6F6] rounded-[8px] flex justify-between items-center py-[12px] sm:py-[22px] px-[21px] sm:px-[36px]"
-  >
-    <div class="flex sm:gap-[24px] gap-[19px] items-center">
-      <img
-        src="/static/images/avatar.png"
-        alt="user"
-        class="rounded-full sm:w-[76px] sm:h-[76px] h-[52px] w-[52px]"
-      />
-      <h3 class="font-bold sm:text-[24px] text-[16px] lg:w-[200px]">
-        Username
-      </h3>
-      <p class="hidden lg:block text-[24px] text-[#777777]">email</p>
-    </div>
+  </section>
 
-    <div class="flex sm:gap-[44px] gap-[14px] items-center">
-      <img
-        src="/static/images/icons/openedMessage.png"
-        alt="letter"
-        class="sm:w-[30px] sm:h-[30px] w-[16px] h-[16px]"
-      />
-      <button type="submit">
-        <img
-          src="/static/images/icons/trash.png"
-          alt="trash"
-          class="sm:w-[38px] sm:h-[38px] w-[22px] h-[22px]"
-        />
-      </button>
-    </div>
-  </form>
+  {% endfor %}
 </section>
+{%else%}
+<section class="flex justify-center items-center sm:h-[100vh] py-[46px]">
+  <div
+    class="font-bold flex flex-col justify-center items-center sm:gap-[40px] gap-[20px]"
+  >
+    <img
+      src="/static/images/empty2.png"
+      alt="404"
+      class="sm:h-[211px] sm:w-[329px]"
+    />
+    <span class="text-brown lg:text-[70px] sm:text-[50px] text-[30px]"
+      >No Messages Found</span
+    >
+    <p class="sm:text-[24px] text-[18px] text-center">
+      You currently have no messages, <br />
+      we hope you aren't feeling lonly ..
+    </p>
+  </div>
+</section>
+{%endif%}
+
+<script>
+  const container = document.querySelectorAll("#container");
+
+  container.forEach((ele) => {
+    ele.addEventListener("click", (e) => {
+      const deleteForm = ele.lastElementChild.lastElementChild;
+      if (e.target.parentElement.parentElement != deleteForm) {
+        ele.lastElementChild.firstElementChild.submit();
+      }
+    });
+  });
+</script>
 {% endblock %} {% endblock %}

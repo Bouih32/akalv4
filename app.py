@@ -78,10 +78,24 @@ def getCartItems():
     length = len(results)
     return length
 
+@login_required
+def getMessagesLength():
+    con = sqlite3.connect("akal.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM message ")
+    msgs = cur.fetchall()
+    cur.close()
+    con.close()
+    length= len(msgs)
+    return length
+
 @app.route('/contact')
 def contact():
     length = getCartItems()
-    return render_template("contact.html",length=length)
+    messagesLength=getMessagesLength()
+  
+    return render_template("contact.html",length=length,messagesLength=messagesLength)
 
 @app.route('/contactRequest',methods=['GET', 'POST'])
 def contactRequest():
@@ -102,7 +116,8 @@ def contactRequest():
 @login_required
 def profile():
     length = getCartItems()
-    return render_template("profile.html",current_user=current_user,length=length)
+    messagesLength=getMessagesLength()
+    return render_template("profile.html",current_user=current_user,length=length,messagesLength=messagesLength)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
@@ -113,8 +128,9 @@ def add():
 
 @app.route('/editFerilizer', methods=['GET', 'POST'])
 def editFerilizer():
+    length = getCartItems()
+    messagesLength=getMessagesLength()
     if request.method == 'POST':
-    
             fertilizer_name = request.form['fertilizer_name']
             con = sqlite3.connect("akal.db")
             con.row_factory = sqlite3.Row
@@ -124,9 +140,14 @@ def editFerilizer():
             con.commit()
             con.close()
             
-            if land:
+            if land and current_user.role == 1:
                 return render_template('editFerilizer.html', info=fertilizer)
-    return render_template('editFerilizer.html')
+            else :
+                return render_template('notFound.html', length=length,messagesLength=messagesLength)
+    if current_user.role == 1:
+        return render_template('editFerilizer.html', info=fertilizer,messagesLength=messagesLength)
+    else :
+        return render_template('notFound.html', length=length,messagesLength=messagesLength)
 
 @app.route('/editRequest', methods=['GET', 'POST'])
 def editRequest():
@@ -144,7 +165,6 @@ def editRequest():
             con.close()
             return redirect(url_for('manageFertilizers'))
             
-    
 
 @app.route('/edit_user', methods=['GET', 'POST'])
 @login_required
@@ -214,14 +234,15 @@ def result():
 @app.route('/manageUsers')
 @login_required
 def manageUsers():
+    messagesLength=getMessagesLength()
     con = sqlite3.connect("akal.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
     cur.execute("SELECT user_id, username, role, profile_path, email  FROM user")
     users = cur.fetchall()  
     con.close()
-    if(current_user.role == 1):
-        return render_template("manageUsers.html",users=users)
+    if current_user.role == 1:
+        return render_template("manageUsers.html",users=users,messagesLength=messagesLength)
     else:
         return render_template("profile.html",current_user=current_user)
     
@@ -237,8 +258,6 @@ def deleteUsers():
     cur.close()
     con.close()
     return redirect(url_for('manageUsers'))
-    
-    
 
 @app.route('/manageFertilizers')
 @login_required
@@ -249,8 +268,9 @@ def manageFertilizers():
     cur.execute("SELECT * FROM fertilizer")
     fertilizers = cur.fetchall()  
     con.close()
+    messagesLength=getMessagesLength()
     if(current_user.role == 1):
-        return render_template("manageFertilizers.html" , datas=fertilizers)
+        return render_template("manageFertilizers.html" , datas=fertilizers,messagesLength=messagesLength)
     else:
         return render_template("profile.html",current_user=current_user)
 
@@ -266,8 +286,9 @@ def shopAll():
     fertilizers = cur.fetchall()  
     con.close()
     length = getCartItems()
+    messagesLength=getMessagesLength()
 
-    return render_template("shopAll.html",datas=fertilizers,length=length)
+    return render_template("shopAll.html",datas=fertilizers,length=length,messagesLength=messagesLength)
 
 
 @app.route('/shopFull')
@@ -280,8 +301,9 @@ def shopFull():
     fertilizers = cur.fetchall()  
     con.close()
     length = getCartItems()
+    messagesLength=getMessagesLength()
 
-    return render_template("shopFull.html",datas=fertilizers,length=length)
+    return render_template("shopFull.html",datas=fertilizers,length=length,messagesLength=messagesLength)
 
 
 @app.route('/shopOut')
@@ -294,8 +316,9 @@ def shopOut():
     fertilizers = cur.fetchall()  
     con.close()
     length = getCartItems()
+    messagesLength=getMessagesLength()
 
-    return render_template("shopOut.html",datas=fertilizers,length=length)
+    return render_template("shopOut.html",datas=fertilizers,length=length,messagesLength=messagesLength)
 
 @app.route('/buy',methods=['POST','GET'])
 @login_required
@@ -310,9 +333,10 @@ def buy():
         con.commit()
         con.close()
         length = getCartItems()
+        messagesLength=getMessagesLength()
             
         if fertilizer:
-            return render_template('buy.html', info=fertilizer,length=length)
+            return render_template('buy.html', info=fertilizer,length=length,messagesLength=messagesLength)
 
 
 @app.route('/buyRequest',methods=['POST','GET'])
@@ -365,23 +389,61 @@ def cart():
     results = cur.fetchall()
     con.close()
     length = len(results)
+    messagesLength=getMessagesLength()
 
-    return render_template("cart.html",datas=results,length=length)
+    return render_template("cart.html",datas=results,length=length,messagesLength=messagesLength)
 
 @app.route('/messages')
 @login_required
-def messages():
-    length = getCartItems()
+def messages(): 
+    con = sqlite3.connect("akal.db")
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM message ")
+    msgs = cur.fetchall()
+    cur.close()
+    con.close()
+    messagesLength=getMessagesLength()
 
-    return render_template("messages.html",length=length)
+    if current_user.role == 1:
+        return render_template("messages.html",msgs=msgs,messagesLength=messagesLength)
+    else :
+        return render_template("notFound.html",)
 
 
-@app.route('/messageDetails')
+@app.route('/messageDetails',methods = ['GET','POST'])
 @login_required
 def messageDetails():
-    length = getCartItems()
+    if request.method == 'POST':
+        length = getCartItems()
+        id= request.form['msg_id']
+        con = sqlite3.connect("akal.db")
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM message WHERE message_id=?",(id,))
+        msg = cur.fetchone()
+        cur.execute("UPDATE message SET opened =? WHERE message_id=?",(1,id,))
+        con.commit()
+        cur.close()
+        con.close()
+        messagesLength=getMessagesLength()
+        if current_user.role == 1:
+            return render_template("messageDetails.html",msg=msg,messagesLength=messagesLength)
+        else :
+            return render_template("notFound.html",length=length,messagesLength=messagesLength)
 
-    return render_template("messageDetails.html",length=length)
+@app.route('/deleteMessage',methods = ['GET','POST'])
+@login_required
+def deleteMessage():
+    if request.method == 'POST':
+        id= request.form['msg_id']
+        con = sqlite3.connect("akal.db")
+        cur = con.cursor()
+        cur.execute("DELETE FROM message WHERE message_id=?",(id,))
+        con.commit()
+        cur.close()
+        con.close()
+        return redirect(url_for('messages'))
 
 
 @app.route('/land')
@@ -399,9 +461,12 @@ def land():
     land = cur.fetchall()  
     con.close()
     length=getCartItems()
-    
-    return render_template("land.html",datas=land,length=length)
-    
+    messagesLength=getMessagesLength()
+    if current_user.role ==1 :
+        return render_template("profile.html",messagesLength=messagesLength)
+    else:
+        return render_template("land.html",datas=land,length=length)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
