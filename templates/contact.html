@@ -42,6 +42,12 @@
   <div
     class="flex flex-col justify-center items-center lg:w-[50%] sm:py-[65px] py-[54px]"
   >
+    <img
+      src="/static/images/success.gif"
+      alt="success"
+      id="success"
+      class="hidden"
+    />
     <form
       action="{{url_for('contactRequest')}}"
       method="POST"
@@ -55,18 +61,18 @@
       </h2>
       <div class="flex flex-col gap-[20px] sm:gap-[30px] lg:gap-[25px] w-full">
         <input
-          type="email"
-          class="noAnimation placeholder:text-[#7E9978] border border-[#0C3E00] rounded-[10px] outline-none lg:p-[20px] p-[20px] sm:py-[30px] sm:pl-[26px]"
-          placeholder="Your Email"
-          id="email"
-          name="email"
-        />
-        <input
           type="text"
           placeholder="Your Name"
           id="name"
           class="noAnimation placeholder:text-[#7E9978] border border-[#0C3E00] rounded-[10px] outline-none lg:p-[20px] p-[20px] sm:py-[30px] sm:pl-[26px]"
           name="name"
+        />
+        <input
+          type="email"
+          class="noAnimation placeholder:text-[#7E9978] border border-[#0C3E00] rounded-[10px] outline-none lg:p-[20px] p-[20px] sm:py-[30px] sm:pl-[26px]"
+          placeholder="Your Email"
+          id="email"
+          name="email"
         />
         <textarea
           type="text"
@@ -92,6 +98,10 @@
   const name = document.querySelector("#name");
   const email = document.querySelector("#email");
   const msg = document.querySelector("#msg");
+  const success = document.querySelector("#success");
+  const emailPattern = new RegExp(
+    "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+  );
 
   function errorFeedback(ele, message, original) {
     ele.classList.add("border-red-500", "placeholder:text-red-500");
@@ -106,8 +116,13 @@
     e.preventDefault();
     let hasError = false;
 
-    if (email.value === "" || email.value.length > 50) {
+    if (
+      email.value === "" ||
+      email.value.length > 50 ||
+      !emailPattern.test(email.value)
+    ) {
       errorFeedback(email, "Please Enter A Valid Email", "Your Email");
+      email.value = "";
       hasError = true;
     }
 
@@ -117,6 +132,7 @@
         "Please Enter A Name Under 10 characters",
         "Your Name"
       );
+      name.value = "";
 
       hasError = true;
     }
@@ -127,11 +143,16 @@
         "Please Enter Your Message Under 200 Characters",
         "Your Message"
       );
+      msg.value = "";
       hasError = true;
     }
 
     if (!hasError) {
-      form.submit();
+      form.classList.add("hidden");
+      success.classList.remove("hidden");
+      setTimeout(() => {
+        form.submit();
+      }, 3000);
     }
   });
 </script>
