@@ -374,6 +374,7 @@ def cart():
         SELECT 
             owned.name, 
             owned.many, 
+            owned.review,
             fertilizer.price, 
             fertilizer.land_src
         FROM 
@@ -392,6 +393,21 @@ def cart():
     messagesLength=getMessagesLength()
 
     return render_template("cart.html",datas=results,length=length,messagesLength=messagesLength)
+
+@app.route('/addReview',methods=['POST','GET'])
+@login_required
+def addReview():
+    review = float(request.form['review'])
+    name = request.form['name']
+    user =  current_user.id
+    con = sqlite3.connect("akal.db")
+    cur = con.cursor()
+    cur.execute('UPDATE owned SET review = ? WHERE name = ? AND user_id = ?' , (review ,name,user))
+    con.commit()
+    con.close()
+    return redirect(url_for('cart'))
+
+
 
 @app.route('/messages')
 @login_required

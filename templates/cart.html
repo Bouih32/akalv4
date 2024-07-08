@@ -27,9 +27,43 @@
           >Owned ({{data.many}})
         </span>
       </div>
-      <p class="text-[#777777] leading-[149.88%] text-[18px] font-bold">
-        Total : ${{data.price * data.many}}
-      </p>
+      <div class="flex items-center gap-[5px]">
+        <p class="text-[#777777] leading-[149.88%] text-[18px] font-bold">
+          Total : ${{data.price * data.many}}
+        </p>
+        <i class="fa-solid fa-circle text-[6px] text-black/60"></i>
+        <form action="{{url_for('addReview')}}" method="post" id="container">
+          <input
+            type="hidden"
+            value="{{data.review}}"
+            id="review"
+            name="review"
+          />
+          <input type="hidden" value="{{data.name}}" name="name" />
+          <div class="flex gap-[4px] justify-center items-center">
+            <i
+              class="fa-solid fa-star text-black/25 cursor-pointer"
+              data-star="1"
+            ></i>
+            <i
+              class="fa-solid fa-star text-black/25 cursor-pointer"
+              data-star="2"
+            ></i>
+            <i
+              class="fa-solid fa-star text-black/25 cursor-pointer"
+              data-star="3"
+            ></i>
+            <i
+              class="fa-solid fa-star text-black/25 cursor-pointer"
+              data-star="4"
+            ></i>
+            <i
+              class="fa-solid fa-star text-black/25 cursor-pointer"
+              data-star="5"
+            ></i>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -53,4 +87,43 @@
     </p>
   </div>
 </section>
-{% endif %} {% endblock %} {% endblock %}
+
+{% endif %}
+
+<script>
+  const containers = document.querySelectorAll("#container");
+
+  containers.forEach((container) => {
+    const stars = container.querySelectorAll("i");
+    const review = container.querySelector("#review");
+
+    let score = review.value;
+
+    stars.forEach((star) => {
+      if (star.dataset.star <= score) {
+        star.classList.remove("text-black/25", "opacity-60");
+        star.classList.add("text-[#FFAD33]");
+      }
+
+      star.addEventListener("mouseover", () => {
+        stars.forEach((ele) => {
+          if (ele.dataset.star <= star.dataset.star) {
+            ele.classList.remove("text-black/25", "opacity-60");
+            ele.classList.add("text-[#FFAD33]");
+          } else {
+            ele.classList.add("text-black/25");
+            ele.classList.remove("text-[#FFAD33]");
+          }
+        });
+      });
+
+      star.addEventListener("click", () => {
+        score = star.dataset.star;
+        review.value = star.dataset.star;
+        container.submit();
+      });
+    });
+  });
+</script>
+
+{% endblock %} {% endblock %}
