@@ -30,26 +30,11 @@
             class="flex gap-[5px] justify-center items-center"
             id="container"
           >
-            <i
-              class="fa-solid fa-star text-[#FFAD33] opacity-50 hover:opacity-100 cursor-pointer"
-              data-star="1"
-            ></i>
-            <i
-              class="fa-solid fa-star text-[#FFAD33] opacity-60 hover:opacity-100 cursor-pointer"
-              data-star="2"
-            ></i>
-            <i
-              class="fa-solid fa-star text-[#FFAD33] opacity-60 hover:opacity-100 cursor-pointer"
-              data-star="3"
-            ></i>
-            <i
-              class="fa-solid fa-star text-[#FFAD33] opacity-60 hover:opacity-100 cursor-pointer"
-              data-star="4"
-            ></i>
-            <i
-              class="fa-solid fa-star text-[#FFAD33] opacity-60 hover:opacity-100 cursor-pointer"
-              data-star="5"
-            ></i>
+            <i class="fa-solid fa-star text-black/25" data-star="1"></i>
+            <i class="fa-solid fa-star text-black/25" data-star="2"></i>
+            <i class="fa-solid fa-star text-black/25" data-star="3"></i>
+            <i class="fa-solid fa-star text-black/25" data-star="4"></i>
+            <i class="fa-solid fa-star text-black/25" data-star="5"></i>
           </div>
           <input
             id="stock"
@@ -139,8 +124,8 @@
 
   stars.forEach((star) => {
     if (star.dataset.star <= score.value) {
-      star.classList.remove("opacity-50");
-      star.classList.add("opacity-100");
+      star.classList.remove("text-black/25");
+      star.classList.add("text-[#FFAD33]");
     }
   });
 

@@ -352,7 +352,7 @@ def buyRequest():
     if(fertilizer) :
         cur.execute('UPDATE owned SET many = ? WHERE user_id = ? AND name = ?', (fertilizer[2] + many, user,name))
     else :
-        cur.execute("INSERT INTO owned (user_id, name, many) VALUES (?, ?, ?)", (user, name, many))
+        cur.execute("INSERT INTO owned (user_id, name, many,review) VALUES (?, ?, ?,?)", (user, name, many,0))
     cur.execute("SELECT quantity FROM fertilizer WHERE name = ? ", (name,))
     old = cur.fetchall() 
     oldNumber = int(old[0][0])
