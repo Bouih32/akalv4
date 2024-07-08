@@ -26,7 +26,31 @@
       >
         <h2 class="text-[24px] font-semibold leading-[24px]">{{info.name}}</h2>
         <div class="flex gap-[8px] items-center">
-          <img src="/static/images/icons/stars.png" alt="reviews" />
+          <div
+            class="flex gap-[5px] justify-center items-center"
+            id="container"
+          >
+            <i
+              class="fa-solid fa-star text-[#FFAD33] opacity-50 hover:opacity-100 cursor-pointer"
+              data-star="1"
+            ></i>
+            <i
+              class="fa-solid fa-star text-[#FFAD33] opacity-60 hover:opacity-100 cursor-pointer"
+              data-star="2"
+            ></i>
+            <i
+              class="fa-solid fa-star text-[#FFAD33] opacity-60 hover:opacity-100 cursor-pointer"
+              data-star="3"
+            ></i>
+            <i
+              class="fa-solid fa-star text-[#FFAD33] opacity-60 hover:opacity-100 cursor-pointer"
+              data-star="4"
+            ></i>
+            <i
+              class="fa-solid fa-star text-[#FFAD33] opacity-60 hover:opacity-100 cursor-pointer"
+              data-star="5"
+            ></i>
+          </div>
           <input
             id="stock"
             readonly
@@ -34,6 +58,7 @@
             class="text-[14px] text-black/50 leading-[21px] outline-none"
           />
         </div>
+        <input type="hidden" value="{{info.score}}" id="score" />
         <span class="text-[24px] leading-[24px]">${{info.price}}</span>
         <p class="text-[14px] leading-[21px]">{{info.description}}</p>
       </div>
@@ -109,6 +134,15 @@
   const many = document.querySelector("#many");
   const stock = document.querySelector("#stock");
   const stockValue = Number(stock.value.split(" ")[0].slice(1));
+  const score = document.querySelector("#score");
+  const stars = document.querySelectorAll("#container i");
+
+  stars.forEach((star) => {
+    if (star.dataset.star <= score.value) {
+      star.classList.remove("opacity-50");
+      star.classList.add("opacity-100");
+    }
+  });
 
   plus.addEventListener("click", (e) => {
     e.preventDefault();
