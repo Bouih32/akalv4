@@ -83,7 +83,7 @@ def getMessagesLength():
     con = sqlite3.connect("akal.db")
     con.row_factory = sqlite3.Row
     cur = con.cursor()
-    cur.execute("SELECT * FROM message ")
+    cur.execute("SELECT * FROM message WHERE opened=? ",(0,))
     msgs = cur.fetchall()
     cur.close()
     con.close()
@@ -403,7 +403,15 @@ def addReview():
     con = sqlite3.connect("akal.db")
     cur = con.cursor()
     cur.execute('UPDATE owned SET review = ? WHERE name = ? AND user_id = ?' , (review ,name,user))
+    cur.execute("SELECT review FROM owned WHERE name = ?", (name,))
+    reviews = cur.fetchall()
+    score =0
+    for rev in reviews :
+        score += rev[0]
+    finalScore = score//len(reviews)
+    cur.execute('UPDATE fertilizer SET score = ? WHERE name = ? ' , (finalScore ,name))
     con.commit()
+    cur.close()
     con.close()
     return redirect(url_for('cart'))
 
@@ -556,7 +564,6 @@ def predict():
             else :
                 result=prediction[0]
 
-        
             con = sqlite3.connect("akal.db")
             con.row_factory = sqlite3.Row
             cur = con.cursor()

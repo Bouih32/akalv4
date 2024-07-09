@@ -4,6 +4,7 @@
 </section>
 <div class="flex justify-center items-center lg:h-[100vh] py-[50px]">
   <form
+    id="form"
     action="{{url_for('buyRequest')}}"
     method="post"
     class="flex flex-col lg:flex-row lg:gap-[115px] sm:gap-[46px] gap-[27px] items-center sm:px-[50px] px-[30px]"
@@ -50,7 +51,7 @@
       <div
         class="flex flex-col lg:gap-[47px] sm:gap-[23px] gap-[36px] lg:pt-[46px] sm:pl-[19px] lg:pl-0 pl-0"
       >
-        <div class="flex gap-[16px] mt-[24px] sm:mt-0">
+        <div class="flex gap-[16px] mt-[24px] sm:mt-0 items-center">
           <div class="flex h-[44px]">
             <button
               id="minus"
@@ -73,10 +74,17 @@
           </div>
           <button
             type="submit"
+            id="addBtn"
             class="bg-main h-[44px] rounded font-bold leading-[24px] text-white py-[10px] px-[34px] sm:px-[41px] lg:px-[48px] text-nowrap"
           >
-            Buy Now
+            Add To Cart
           </button>
+          <img
+            src="/static/images/addsuccess.gif"
+            alt="success"
+            id="success"
+            class="w-[40px] sm:ml-[40px] ml-[20px] hidden"
+          />
         </div>
         <div class="sm:divide-y-[1px] sm:divide-black">
           <section
@@ -120,7 +128,20 @@
   const stock = document.querySelector("#stock");
   const stockValue = Number(stock.value.split(" ")[0].slice(1));
   const score = document.querySelector("#score");
+  const success = document.querySelector("#success");
+  const form = document.querySelector("#form");
+  const addBtn = document.querySelector("#addBtn");
   const stars = document.querySelectorAll("#container i");
+
+  addBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    addBtn.classList.add("hidden");
+    success.classList.remove("hidden");
+
+    setTimeout(() => {
+      form.submit();
+    }, 1000);
+  });
 
   stars.forEach((star) => {
     if (star.dataset.star <= score.value) {
