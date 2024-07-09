@@ -49,8 +49,9 @@ def load_user(user_id):
 @app.route('/')
 def index():
     length = getCartItems()
+    messagesLength=getMessagesLength()
 
-    return render_template("index.html",length=length)
+    return render_template("index.html",length=length,messagesLength=messagesLength)
 
 @login_required
 def getCartItems():
@@ -412,7 +413,6 @@ def addReview():
     cur.execute('UPDATE fertilizer SET score = ? WHERE name = ? ' , (finalScore ,name))
     con.commit()
     cur.close()
-    con.close()
     return redirect(url_for('cart'))
 
 
